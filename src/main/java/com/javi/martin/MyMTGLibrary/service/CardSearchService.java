@@ -1,0 +1,53 @@
+package com.javi.martin.MyMTGLibrary.service;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.javi.martin.MyMTGLibrary.dto.MTGCardDTO;
+import com.javi.martin.MyMTGLibrary.utils.ParametersStringBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.HashMap;
+
+@Service
+public class CardSearchService {
+
+    @Autowired
+    private CardDBSaverService cardDBSaverService;
+
+    private ObjectMapper objectMapper;
+    private static final Logger log = LoggerFactory.getLogger(CardSearchService.class);
+
+    public CardSearchService() {
+        objectMapper = new ObjectMapper();
+    }
+
+    public String getCardsLol(String cardName) {
+        var returnString = "";
+        var requestParams = new HashMap<String, String>();
+        requestParams.put("fuzzy", cardName);
+        requestParams.put("format", "json");
+        requestParams.put("pretty", "true");
+
+        var client = HttpClient.newHttpClient();
+
+        try  {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("https://api.scryfall.com/cards/named" + ParametersStringBuilder.getParamsString(requestParams))).build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            MTGCardDTO card = objectMapper.readValue(response.body(), MTGCardDTO.class);
+            cardDBSaverService.saveCard(card, 1);
+            returnString += response.body();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return returnString;
+    }
+}
