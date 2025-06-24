@@ -1,0 +1,17 @@
+body {
+    background-color: lightblue;
+}
+
+.footerText {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+#authorText {
+    height: 12vh;
+}
+
+#versionText {
+    height: 8vh;
+}

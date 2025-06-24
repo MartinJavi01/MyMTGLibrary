@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="UTF-8">
+  <title>MyMTGLibrary</title>
+  <link th:href="@{/styles/home.css}" rel="stylesheet"/>
+  <script type="text/javascript" th:src="@{/js/home.js}"></script>
+</head>
+
+<body>
+  <h1>Welcome to MyMTGLibrary</h1>
+  <button>List all cards</button>
+  <input placeholder="Search a card">
+  <button>Search</button>
+  <br>
+  <button type="button" th:onclick="showAlert()">Alerta woke!!</button>
+</body>
+
+<footer>
+  <h3 class="footerText" id="authorText">By Javier Martín Escobar</h3>
+  <p class="footerText" id="versionText">Version 0.1.0</p>
+</footer>
+
+</html>
