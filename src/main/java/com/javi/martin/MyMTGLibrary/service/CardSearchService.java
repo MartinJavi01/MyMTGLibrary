@@ -27,27 +27,24 @@ public class CardSearchService {
         objectMapper = new ObjectMapper();
     }
 
-    public String getCardsLol(String cardName) {
-        var returnString = "";
+    public MTGCardDTO searchCardByName(String cardName) {
         var requestParams = new HashMap<String, String>();
         requestParams.put("fuzzy", cardName);
         requestParams.put("format", "json");
-        requestParams.put("pretty", "true");
 
         var client = HttpClient.newHttpClient();
+        MTGCardDTO returnCard;
 
         try  {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("https://api.scryfall.com/cards/named" + ParametersStringBuilder.getParamsString(requestParams))).build();
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            MTGCardDTO card = objectMapper.readValue(response.body(), MTGCardDTO.class);
-            cardDBSaverService.saveCard(card, 1);
-            returnString += response.body();
+            returnCard = objectMapper.readValue(response.body(), MTGCardDTO.class);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        return returnString;
+        return returnCard;
     }
 }

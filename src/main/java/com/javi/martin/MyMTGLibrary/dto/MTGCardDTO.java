@@ -28,15 +28,15 @@ public class MTGCardDTO {
     @JsonProperty("name")
     private String name;
     @JsonProperty("released_at")
-    private Date released_at;
+    private Date releasedAt;
     @JsonProperty("image_uris")
-    private ImageUris image_uris;
+    private ImageUris imageUris;
     @JsonProperty("cmc")
     private int cmc;
     @JsonProperty("type_line")
-    private String type_line;
+    private String typeLine;
     @JsonProperty("oracle_text")
-    private String oracle_text;
+    private String oracleText;
     @JsonProperty("power")
     private int power;
     @JsonProperty("toughness")
@@ -50,9 +50,9 @@ public class MTGCardDTO {
     @JsonProperty("set")
     private String set;
     @JsonProperty("set_id")
-    private String set_id;
+    private String setId;
     @JsonProperty("set_name")
-    private String set_name;
+    private String setName;
 
     private int quantity;
 
