@@ -24,7 +24,7 @@ public class MTGCardDTO {
     @JsonProperty("oracle_id")
     private String oracleId;
     @JsonProperty("cardmarket_id")
-    private int cardmarketId;
+    private String cardmarketId;
     @JsonProperty("name")
     private String name;
     @JsonProperty("released_at")
@@ -32,15 +32,15 @@ public class MTGCardDTO {
     @JsonProperty("image_uris")
     private ImageUris imageUris;
     @JsonProperty("cmc")
-    private int cmc;
+    private String cmc;
     @JsonProperty("type_line")
     private String typeLine;
     @JsonProperty("oracle_text")
     private String oracleText;
     @JsonProperty("power")
-    private int power;
+    private String power;
     @JsonProperty("toughness")
-    private int toughness;
+    private String toughness;
     @JsonProperty("colors")
     private List<String> colors;
     @JsonProperty("colorIdentity")

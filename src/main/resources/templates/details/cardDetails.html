@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CardDetails</title>
+    <link th:href="@{/styles/details/cardDetails.css}" rel="stylesheet"/>
+</head>
+
+<body>
+    <p th:text="${currentCard.name}" id="cardNameText">Card name</p>
+    <div class="detailsContainer">
+        <img th:src="${currentCard.imageUris.normal}" id="cardImageFull">
+
+        <div class="cardDetailsInnerContainer">
+            <div class="detailsContainer">
+                <p class="detailText">Card type: </p>
+                <p class="detailText" th:utext="${currentCard.typeLine}">Type</p>
+            </div>
+
+            <div class="detailsContainer">
+                <p class="detailText">Cmc: </p>
+                <p class="detailText" th:utext="${currentCard.cmc}"></p>
+            </div>
+
+            <div class="detailsContainer">
+                <p class="detailText">Description: </p>
+                <p class="detailText" th:utext="${currentCard.oracleText}"></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

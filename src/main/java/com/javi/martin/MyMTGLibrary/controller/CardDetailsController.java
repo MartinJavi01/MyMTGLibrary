@@ -1,6 +1,7 @@
 package com.javi.martin.MyMTGLibrary.controller;
 
 import com.javi.martin.MyMTGLibrary.service.CardSearchService;
+import com.javi.martin.MyMTGLibrary.service.CardUIPreparer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +14,14 @@ public class CardDetailsController {
 
     @Autowired
     private CardSearchService cardSearchService;
+    @Autowired
+    private CardUIPreparer preparer;
 
     @RequestMapping("/name/{cardName}")
     public String getCardDetailsByName(Model model, @PathVariable String cardName) {
         var card = cardSearchService.searchCardByName(cardName);
+        card = preparer.prepareCard(card);
         model.addAttribute("currentCard", card);
-        return "cardDetails";
+        return "details/cardDetails";
     }
 }
