@@ -15,17 +15,17 @@
         <div class="cardDetailsInnerContainer">
             <div class="detailsContainer">
                 <p class="detailText">Card type: </p>
-                <p class="detailText" th:utext="${currentCard.typeLine}">Type</p>
+                <p class="detailText detailInfo" th:utext="${currentCard.typeLine}">Type</p>
             </div>
 
             <div class="detailsContainer">
                 <p class="detailText">Cmc: </p>
-                <p class="detailText" th:utext="${currentCard.cmc}"></p>
+                <p class="detailText detailInfo" th:utext="${currentCard.cmc}"></p>
             </div>
 
             <div class="detailsContainer">
                 <p class="detailText">Description: </p>
-                <p class="detailText" th:utext="${currentCard.oracleText}"></p>
+                <p class="detailText detailInfo" th:utext="${currentCard.oracleText}"></p>
             </div>
         </div>
     </div>

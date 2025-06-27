@@ -23,7 +23,7 @@ body {
 
 .cardDetailsInnerContainer {
     display: inline-block;
-    width: 40vw;
+    width: 50vw;
 }
 
 .detailText {
@@ -31,4 +31,13 @@ body {
     text-align: start;
     font-size: 3vh;
     margin-bottom: -2vh;
+}
+
+.detailInfo {
+    margin-left: 1vw;
+}
+
+.symbolImage {
+    width: 2vw;
+    height: 2vh;
 }
