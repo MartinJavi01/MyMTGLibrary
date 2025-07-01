@@ -4,8 +4,6 @@ import com.javi.martin.MyMTGLibrary.dto.MTGCardDTO;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Objects;
-
 import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.*;
 
 
@@ -16,12 +14,21 @@ public class CardUIPreparer {
     public MTGCardDTO prepareCard(MTGCardDTO cardToPrepare) {
         MTGCardDTO finalCard = cardToPrepare;
 
-        var splitedDescription = cardToPrepare.getOracleText().split("\\.");
-        finalCard.setOracleText(String.join(".<br>", splitedDescription));
-
+        finalCard.setOracleText(getNewLineUIDescription(finalCard.getOracleText()));
         finalCard.setOracleText(getUIDescription(finalCard.getOracleText()));
 
         return finalCard;
+    }
+
+    private String getNewLineUIDescription(String baseDescription) {
+        var splitedDescription = baseDescription.split("\\r?\\n");
+        for (int i = 0; i < splitedDescription.length; i++) {
+            if (splitedDescription[i].charAt(splitedDescription[i].length() - 1) != '.'
+                && splitedDescription[i].charAt(splitedDescription[i].length() - 1) != ')') {
+                splitedDescription[i] += ".";
+            }
+        }
+        return String.join("<br><br>", splitedDescription);
     }
 
     private String getUIDescription(String baseDescription) {

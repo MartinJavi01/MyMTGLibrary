@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <link th:href="@{/styles/common/footer.css}" rel="stylesheet"/>
+</head>
+
+<footer>
+    <div th:fragment="footerFragment" id="footerDiv">
+        <h3 class="footerText" id="authorText">By Javier Martín Escobar</h3>
+        <p class="footerText" id="versionText" th:utext="${version}">Version text</p>
+    </div>
+</footer>
+
+</html>

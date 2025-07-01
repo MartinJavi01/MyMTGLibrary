@@ -41,3 +41,10 @@ body {
     width: 2vw;
     height: 2vh;
 }
+
+#footerDiv {
+    position: absolute;
+    right: 0;
+    margin-right: 2vw;
+    bottom: 0;
+}

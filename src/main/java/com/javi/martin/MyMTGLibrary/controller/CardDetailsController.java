@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.CURRENT_VERSION;
+
 @Controller
 @RequestMapping("/details")
 public class CardDetailsController {
@@ -22,6 +24,7 @@ public class CardDetailsController {
         var card = cardSearchService.searchCardByName(cardName);
         card = preparer.prepareCard(card);
         model.addAttribute("currentCard", card);
+        model.addAttribute("version", "Current version: " + CURRENT_VERSION);
         return "details/cardDetails";
     }
 }

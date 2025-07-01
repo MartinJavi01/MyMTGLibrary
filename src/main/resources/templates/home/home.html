@@ -12,13 +12,10 @@
   <button>List all cards</button>
   <input placeholder="Search a card">
   <button>Search</button>
-  <br>
-  <button type="button" th:onclick="showAlert()">Alerta woke!!</button>
 </body>
 
 <footer>
-  <h3 class="footerText" id="authorText">By Javier Martín Escobar</h3>
-  <p class="footerText" id="versionText">Version 0.1.0</p>
+  <div th:insert="common/footer :: footerFragment"></div>
 </footer>
 
 </html>
