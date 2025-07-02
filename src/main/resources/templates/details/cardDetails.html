@@ -19,13 +19,33 @@
             </div>
 
             <div class="detailsContainer">
+                <p class="detailText">Mana cost: </p>
+                <p class="detailText detailInfo" th:utext="${currentCard.manaCost}">Mana cost</p>
+            </div>
+
+            <div class="detailsContainer">
+                <p class="detailText">Color identity: </p>
+                <p class="detailText detailInfo" th:utext="${currentCard.colorIdentity.get(0)}">Color identity</p>
+            </div>
+
+            <div class="detailsContainer">
                 <p class="detailText">Cmc: </p>
-                <p class="detailText detailInfo" th:utext="${currentCard.cmc}"></p>
+                <p class="detailText detailInfo" th:utext="${currentCard.cmc}">Cmc</p>
+            </div>
+
+            <div class="detailsContainer">
+                <p class="detailText">Power: </p>
+                <p class="detailText detailInfo" th:utext="${currentCard.power}">Power</p>
+            </div>
+
+            <div class="detailsContainer">
+                <p class="detailText">Toughness: </p>
+                <p class="detailText detailInfo" th:utext="${currentCard.toughness}">Thoughness</p>
             </div>
 
             <div class="detailsContainer">
                 <p class="detailText">Description: </p>
-                <p class="detailText detailInfo" th:utext="${currentCard.oracleText}"></p>
+                <p class="detailText detailInfo" th:utext="${currentCard.oracleText}">Description</p>
             </div>
         </div>
     </div>

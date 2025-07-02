@@ -4,6 +4,10 @@ import com.javi.martin.MyMTGLibrary.dto.MTGCardDTO;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.*;
 
 
@@ -15,7 +19,15 @@ public class CardUIPreparer {
         MTGCardDTO finalCard = cardToPrepare;
 
         finalCard.setOracleText(getNewLineUIDescription(finalCard.getOracleText()));
-        finalCard.setOracleText(getUIDescription(finalCard.getOracleText()));
+        finalCard.setOracleText(parseSymbolsToImage(finalCard.getOracleText()));
+        finalCard.setManaCost(prepareManaCost(finalCard.getManaCost()));
+        if (!finalCard.getColorIdentity().isEmpty()) {
+            finalCard.setColorIdentity(prepareColorsString(finalCard.getColorIdentity()));
+        } else {
+            var colorlessList = new ArrayList<String>();
+            colorlessList.add("Colorless");
+            finalCard.setColorIdentity(colorlessList);
+        }
 
         return finalCard;
     }
@@ -31,7 +43,7 @@ public class CardUIPreparer {
         return String.join("<br><br>", splitedDescription);
     }
 
-    private String getUIDescription(String baseDescription) {
+    private String parseSymbolsToImage(String baseDescription) {
         var returnString = "";
         var splitedDescription = baseDescription.split("}");
 
@@ -55,5 +67,26 @@ public class CardUIPreparer {
         } else {
             return SYMBOL_API_BASE_URL + MANA_PATH + symbol.replace("/","") + SVG_EXTENSION;
         }
+    }
+
+    private String prepareManaCost(String baseManaCost) {
+        var finalManaCost = "";
+        var splitedColors = baseManaCost.split("\\{");
+        for (int i = 1; i < splitedColors.length; i ++) {
+            finalManaCost += "<img class=\"symbolImage\" src=\"" +
+                    getSymbolApiUrl(splitedColors[i].replace("}", "").toLowerCase()) + "\"/>";
+        }
+
+        return finalManaCost;
+    }
+
+    private List<String> prepareColorsString(List<String> colors) {
+        var finalString = "";
+        var colorsList = new ArrayList<String>();
+        for (int i = 0; i < colors.size(); i++) {
+            finalString += "<img class=\"symbolImage\" src=\"" + getSymbolApiUrl(colors.get(i).toLowerCase()) + "\"/>";
+        }
+        colorsList.add(finalString);
+        return colorsList;
     }
 }

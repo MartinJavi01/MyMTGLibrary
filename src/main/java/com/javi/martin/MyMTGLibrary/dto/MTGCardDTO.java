@@ -31,6 +31,8 @@ public class MTGCardDTO {
     private Date releasedAt;
     @JsonProperty("image_uris")
     private ImageUris imageUris;
+    @JsonProperty("mana_cost")
+    private String manaCost;
     @JsonProperty("cmc")
     private String cmc;
     @JsonProperty("type_line")
@@ -43,7 +45,7 @@ public class MTGCardDTO {
     private String toughness;
     @JsonProperty("colors")
     private List<String> colors;
-    @JsonProperty("colorIdentity")
+    @JsonProperty("color_identity")
     private List<String> colorIdentity;
     @JsonProperty("keywords")
     private List<String> keywords;
