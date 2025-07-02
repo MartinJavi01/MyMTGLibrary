@@ -1,0 +1,10 @@
+body {
+    background-color: lightblue;
+}
+
+#footerDiv {
+    position: absolute;
+    right: 0;
+    margin-right: 2vw;
+    bottom: 0;
+}

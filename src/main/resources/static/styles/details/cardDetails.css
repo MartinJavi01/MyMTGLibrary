@@ -1,0 +1,50 @@
+body {
+    background-color: gray;
+}
+
+#cardNameText {
+    font-size: 7vh;
+    text-align: center;
+    margin-top: 0vh;
+    margin-bottom: 5vh;
+}
+
+#cardImageFull {
+    margin-right: 5vw;
+    margin-left: 10vw;
+    width: 35vh;
+}
+
+.detailsContainer {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2vh;
+}
+
+.cardDetailsInnerContainer {
+    display: inline-block;
+    width: 50vw;
+}
+
+.detailText {
+    white-space: pre-line;
+    text-align: start;
+    font-size: 3vh;
+    margin-bottom: -2vh;
+}
+
+.detailInfo {
+    margin-left: 1vw;
+}
+
+.symbolImage {
+    width: 2vw;
+    height: 2vh;
+}
+
+#footerDiv {
+    position: absolute;
+    right: 0;
+    margin-right: 2vw;
+    bottom: 0;
+}
