@@ -1,5 +1,6 @@
 package com.javi.martin.MyMTGLibrary.controller;
 
+import com.javi.martin.MyMTGLibrary.service.CardDBSearchService;
 import com.javi.martin.MyMTGLibrary.service.CardSearchService;
 import com.javi.martin.MyMTGLibrary.service.CardUIPreparer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class CardDetailsController {
     @Autowired
     private CardSearchService cardSearchService;
     @Autowired
+    private CardDBSearchService cardDBSearchService;
+    @Autowired
     private CardUIPreparer preparer;
 
     @RequestMapping("/name/{cardName}")
@@ -25,6 +28,10 @@ public class CardDetailsController {
         card = preparer.prepareCard(card);
         model.addAttribute("currentCard", card);
         model.addAttribute("version", "Current version: " + CURRENT_VERSION);
+
+        var isOnDb = cardDBSearchService.isCardOnDb(cardName);
+        model.addAttribute("cardOnDb", isOnDb);
+
         return "details/cardDetails";
     }
 }

@@ -49,6 +49,8 @@ public class MTGCardDTO {
     private List<String> colorIdentity;
     @JsonProperty("keywords")
     private List<String> keywords;
+    @JsonProperty("rarity")
+    private String rarity;
     @JsonProperty("set")
     private String set;
     @JsonProperty("set_id")
@@ -56,9 +58,9 @@ public class MTGCardDTO {
     @JsonProperty("set_name")
     private String setName;
 
-    private int quantity;
+    private int copies;
 
     public MTGCardDTO() {
-        quantity = 1;
+        copies = 1;
     }
 }

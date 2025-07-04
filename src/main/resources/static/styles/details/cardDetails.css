@@ -15,15 +15,24 @@ body {
     width: 35vh;
 }
 
-.detailsContainer {
+.horizontalContainer {
     display: flex;
     align-items: flex-start;
     margin-bottom: 2vh;
 }
 
-.cardDetailsInnerContainer {
+#imageDiv {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 30vw;
+}
+
+#detailsDiv {
     display: inline-block;
+    align-items: self-start;
     width: 50vw;
+    margin-left: 10vw;
 }
 
 .detailText {
@@ -42,9 +51,29 @@ body {
     height: 2vh;
 }
 
+.cardRegisterUpdateDiv {
+    width: 30vw;
+}
+
+.cardRegisterUpdateLabel {
+    font-size: 3vh;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    margin-top: 2vh;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.cardRegisterUpdateButton {
+    font-size: 3vh;
+    margin-top: 2vh;
+    white-space: nowrap;
+    text-align: center;
+}
+
 #footerDiv {
     position: absolute;
-    right: 0;
-    margin-right: 2vw;
+    left: 0;
+    margin-left: 1vw;
     bottom: 0;
 }
