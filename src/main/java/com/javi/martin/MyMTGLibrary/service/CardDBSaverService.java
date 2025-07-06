@@ -27,11 +27,11 @@ public class CardDBSaverService {
         template = new MongoTemplate(new SimpleMongoClientDatabaseFactory(MongoClients.create(), "MyMTGLibrary"));
     }
 
-    public void saveCard(MTGCardDTO cardDTO, int quantity) {
+    public void saveCard(MTGCardDTO cardDTO, int copies) {
         Query nameQuery = new Query(Criteria.where("name").is(cardDTO.getName()));
         Optional.ofNullable(cardLibraryRepository.findItemByName(cardDTO.getName()))
                 .ifPresentOrElse( card -> template.update(MTGCardDTO.class)
-                .matching(nameQuery).apply(new Update().inc("quantity", quantity)).upsert(),
+                .matching(nameQuery).apply(new Update().set("copies", copies)).upsert(),
                         () -> template.insert(cardDTO));
     }
 }
