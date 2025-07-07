@@ -10,17 +10,17 @@
 <body>
     <p th:text="${currentCard.name}" id="cardNameText">Card name</p>
     <div class="horizontalContainer">
-        <div class="verticalDiv" id="imageDiv">
+        <div class="verticalDiv" id="imageDiv" th:data-current-card="${dbCard}">
             <img th:src="${currentCard.imageUris.normal}" id="cardImageFull">
 
             <div th:if="${cardOnDb}" class="horizontalContainer cardRegisterUpdateDiv">
                 <label class="cardRegisterUpdateLabel">Card copies: </label>
-                <input type="number" id="quantityInput" value="{currentCard.quantity}">
+                <input type="number" id="quantityInput" value="{currentCard.copies}">
                 <button type="button" class="cardRegisterUpdateButton">Update copies</button>
             </div>
             <div th:unless="${cardOnDb}" class="horizontalContainer cardRegisterUpdateDiv">
                 <label class="cardRegisterUpdateLabel">Card not registered</label>
-                <button type="button" class="cardRegisterUpdateButton" th:attr="onclick=|updateCardDetails('${dbCard}', 1, false)|">Save card</button>
+                <button type="button" class="cardRegisterUpdateButton" th:attr="onclick=|updateCardDetails(1, false)|">Save card</button>
             </div>
         </div>
 

@@ -1,5 +1,6 @@
 package com.javi.martin.MyMTGLibrary.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.javi.martin.MyMTGLibrary.service.CardDBSearchService;
 import com.javi.martin.MyMTGLibrary.service.CardSearchService;
 import com.javi.martin.MyMTGLibrary.service.CardUIPreparer;
@@ -25,19 +26,17 @@ public class CardDetailsController {
     private CardUIPreparer preparer;
 
     @RequestMapping("/name/{cardName}")
-    public String getCardDetailsByName(Model model, @PathVariable String cardName) {
+    public String getCardDetailsByName(Model model, @PathVariable String cardName) throws JsonProcessingException {
         model.addAttribute("version", "Current version: " + CURRENT_VERSION);
 
         var apiCard = cardSearchService.searchCardByName(cardName);
-        var dbCard = cardDBSearchService.getCardByName(cardName);
+        var dbCard = cardDBSearchService.getCardByName(apiCard.getName());
         model.addAttribute("cardOnDb", Objects.nonNull(dbCard));
         apiCard = preparer.prepareCard(apiCard);
-        if (Objects.nonNull(dbCard)) {
-            model.addAttribute("dbCard", dbCard);
-        } else {
+        if (Objects.isNull(dbCard)) {
             dbCard = cardSearchService.searchCardByName(cardName);
-            model.addAttribute("dbCard", dbCard);
         }
+        model.addAttribute("dbCard", cardSearchService.returnCardAsJson(dbCard));
         model.addAttribute("currentCard", apiCard);
 
         return "details/cardDetails";

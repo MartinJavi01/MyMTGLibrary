@@ -1,5 +1,6 @@
 package com.javi.martin.MyMTGLibrary.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javi.martin.MyMTGLibrary.dto.MTGCardDTO;
 import com.javi.martin.MyMTGLibrary.utils.ParametersStringBuilder;
@@ -48,5 +49,9 @@ public class CardSearchService {
         }
 
         return returnCard;
+    }
+
+    public String returnCardAsJson(MTGCardDTO cardDTO) throws JsonProcessingException {
+        return objectMapper.writeValueAsString(cardDTO);
     }
 }
