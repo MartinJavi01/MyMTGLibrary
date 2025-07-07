@@ -36,7 +36,9 @@ public class CardDetailsController {
         if (Objects.isNull(dbCard)) {
             dbCard = cardSearchService.searchCardByName(cardName);
         }
+
         model.addAttribute("dbCard", cardSearchService.returnCardAsJson(dbCard));
+        model.addAttribute("copies", "" + dbCard.getCopies());
         model.addAttribute("currentCard", apiCard);
 
         return "details/cardDetails";

@@ -36,19 +36,20 @@ body {
 }
 
 .detailText {
-    white-space: pre-line;
+    white-space: nowrap;
     text-align: start;
     font-size: 3vh;
     margin-bottom: -2vh;
 }
 
 .detailInfo {
+    white-space: pre-line;
     margin-left: 1vw;
 }
 
 .symbolImage {
-    width: 2vw;
-    height: 2vh;
+    width: 4%;
+    height: 4%;
     margin-right: 0px;
     margin-left: 0px;
 }

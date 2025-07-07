@@ -1,4 +1,5 @@
 var currentCard = document.getElementById("imageDiv").dataset.currentCard;
+var copies = document.getElementById("copiesInput").dataset.copies;
 
 async function updateCardDetails(copies, saved) {
     print("aqui: " + currentCard)
@@ -13,4 +14,8 @@ async function updateCardDetails(copies, saved) {
         .catch((error) => {
         console.error('There was an error updating the DB:', error);
         });
+}
+
+function setInputValue() {
+    document.getElementById("copiesInput").value = copies;
 }

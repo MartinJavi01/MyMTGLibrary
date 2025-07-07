@@ -7,7 +7,7 @@
     <link th:href="@{/styles/details/cardDetails.css}" rel="stylesheet"/>
 </head>
 
-<body>
+<body onload="setInputValue()">
     <p th:text="${currentCard.name}" id="cardNameText">Card name</p>
     <div class="horizontalContainer">
         <div class="verticalDiv" id="imageDiv" th:data-current-card="${dbCard}">
@@ -15,7 +15,7 @@
 
             <div th:if="${cardOnDb}" class="horizontalContainer cardRegisterUpdateDiv">
                 <label class="cardRegisterUpdateLabel">Card copies: </label>
-                <input type="number" id="copiesInput" value="${dbCard.copies}">
+                <input type="number" id="copiesInput" th:data-copies="${copies}">
                 <button type="button" class="cardRegisterUpdateButton">Update copies</button>
                 <button type="button" class="cardRegisterUpdateButton">Delete card</button>
             </div>
