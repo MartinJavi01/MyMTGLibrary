@@ -15,8 +15,9 @@
 
             <div th:if="${cardOnDb}" class="horizontalContainer cardRegisterUpdateDiv">
                 <label class="cardRegisterUpdateLabel">Card copies: </label>
-                <input type="number" id="quantityInput" value="{currentCard.copies}">
+                <input type="number" id="copiesInput" value="${dbCard.copies}">
                 <button type="button" class="cardRegisterUpdateButton">Update copies</button>
+                <button type="button" class="cardRegisterUpdateButton">Delete card</button>
             </div>
             <div th:unless="${cardOnDb}" class="horizontalContainer cardRegisterUpdateDiv">
                 <label class="cardRegisterUpdateLabel">Card not registered</label>
