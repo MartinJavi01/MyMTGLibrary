@@ -3,6 +3,8 @@ package com.javi.martin.MyMTGLibrary.service;
 import com.javi.martin.MyMTGLibrary.dto.MTGCardDTO;
 import com.javi.martin.MyMTGLibrary.repository.CardLibraryRepository;
 import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -14,11 +16,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static com.mongodb.client.model.Filters.*;
+
 @Service
 public class CardDBSaverService {
 
     @Autowired
     private CardLibraryRepository cardLibraryRepository;
+    @Autowired
+    private MongoCollection<Document> cardCollection;
     @Autowired
     private MongoOperations template;
 
@@ -27,11 +33,15 @@ public class CardDBSaverService {
         template = new MongoTemplate(new SimpleMongoClientDatabaseFactory(MongoClients.create(), "MyMTGLibrary"));
     }
 
-    public void saveCard(MTGCardDTO cardDTO, int copies) {
+    public void upsertCard(MTGCardDTO cardDTO, int copies) {
         Query nameQuery = new Query(Criteria.where("name").is(cardDTO.getName()));
         Optional.ofNullable(cardLibraryRepository.findItemByName(cardDTO.getName()))
                 .ifPresentOrElse( card -> template.update(MTGCardDTO.class)
                 .matching(nameQuery).apply(new Update().set("copies", copies)).upsert(),
                         () -> template.insert(cardDTO));
+    }
+
+    public void deleteCard(MTGCardDTO cardDTO) {
+        cardCollection.deleteOne(eq("name", cardDTO.getName()));
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/update-card")
-public class CardSaveController {
+public class CardUpdateController {
 
     @Autowired
     private CardDBSaverService cardDBSaverService;
@@ -15,7 +15,11 @@ public class CardSaveController {
     @PostMapping
     public String saveCard(@RequestBody MTGCardDTO card,
                             @RequestParam(name = "copies") int copies) {
-        cardDBSaverService.saveCard(card, copies);
+        if (copies > 0) {
+            cardDBSaverService.upsertCard(card, copies);
+        } else {
+            cardDBSaverService.deleteCard(card);
+        }
         return "Card updatedSuccessfully";
     }
 }

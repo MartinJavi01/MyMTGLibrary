@@ -16,12 +16,12 @@
             <div th:if="${cardOnDb}" class="horizontalContainer cardRegisterUpdateDiv">
                 <label class="cardRegisterUpdateLabel">Card copies: </label>
                 <input type="number" id="copiesInput" th:data-copies="${copies}">
-                <button type="button" class="cardRegisterUpdateButton">Update copies</button>
-                <button type="button" class="cardRegisterUpdateButton">Delete card</button>
+                <button type="button" class="cardRegisterUpdateButton" th:attr="onclick=|updateCardDetails(true)|">Update copies</button>
+                <button type="button" class="cardRegisterUpdateButton" th:attr="onclick=|updateCardDetails(false)|">Delete card</button>
             </div>
             <div th:unless="${cardOnDb}" class="horizontalContainer cardRegisterUpdateDiv">
                 <label class="cardRegisterUpdateLabel">Card not registered</label>
-                <button type="button" class="cardRegisterUpdateButton" th:attr="onclick=|updateCardDetails(1, false)|">Save card</button>
+                <button type="button" class="cardRegisterUpdateButton" th:attr="onclick=|updateCardDetails(false)|">Save card</button>
             </div>
         </div>
 
