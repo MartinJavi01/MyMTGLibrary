@@ -13,11 +13,15 @@
         <div class="verticalDiv" id="imageDiv" th:data-current-card="${dbCard}">
             <img th:src="${currentCard.imageUris.normal}" id="cardImageFull">
 
-            <div th:if="${cardOnDb}" class="horizontalContainer cardRegisterUpdateDiv">
-                <label class="cardRegisterUpdateLabel">Card copies: </label>
-                <input type="number" id="copiesInput" th:data-copies="${copies}">
-                <button type="button" class="cardRegisterUpdateButton" th:attr="onclick=|updateCardDetails(true)|">Update copies</button>
-                <button type="button" class="cardRegisterUpdateButton" th:attr="onclick=|updateCardDetails(false)|">Delete card</button>
+            <div th:if="${cardOnDb}" class="verticalDiv cardRegisterUpdateDiv">
+                <div class="horizontalContainer">
+                    <label class="cardRegisterUpdateLabel">Card copies: </label>
+                    <input type="number" id="copiesInput" th:data-copies="${copies}">
+                </div>
+                <div class="horizontalContainer">
+                    <button type="button" class="cardRegisterUpdateButton updateDeleteButton" th:attr="onclick=|updateCardDetails(true)|">Update</button>
+                    <button type="button" class="cardRegisterUpdateButton updateDeleteButton" th:attr="onclick=|updateCardDetails(false)|">Delete</button>
+                </div>
             </div>
             <div th:unless="${cardOnDb}" class="horizontalContainer cardRegisterUpdateDiv">
                 <label class="cardRegisterUpdateLabel">Card not registered</label>

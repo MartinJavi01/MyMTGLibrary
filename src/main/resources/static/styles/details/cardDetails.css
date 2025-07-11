@@ -56,11 +56,13 @@ body {
 
 .cardRegisterUpdateDiv {
     width: 30vw;
+    margin-left: 10vw;
+    display: inline-block;
+    align-items: flex-start;
 }
 
 .cardRegisterUpdateLabel {
-    font-size: 3vh;
-    margin-left: 2vw;
+    font-size: 5vh;
     margin-right: 2vw;
     margin-top: 2vh;
     white-space: nowrap;
@@ -76,7 +78,16 @@ body {
 
 #copiesInput {
     margin-top: 2vh;
-    max-width: 3vw;
+    margin-right: 2vw;
+    width: 5vw;
+    height: 5vh;
+    font-size: 4.5vh;
+}
+
+.updateDeleteButton {
+    width: 8vw;
+    height: 5vh;
+    margin-right: 5vw;
 }
 
 #footerDiv {
