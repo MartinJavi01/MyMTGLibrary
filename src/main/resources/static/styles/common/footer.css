@@ -1,14 +1,11 @@
 .footerText {
-    position: absolute;
-    right: 0;
-    margin-right: 2vw;
-    bottom: 0;
+    position: inherit
 }
 
 #authorText {
-    height: 12vh;
+    font-size: 3vh;
 }
 
 #versionText {
-    height: 8vh;
+    font-size: 2vh;
 }

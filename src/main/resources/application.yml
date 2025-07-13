@@ -8,3 +8,8 @@ spring:
       database: MyMTGLibrary
   resources:
     add-mappings: true
+
+mongo:
+  mongoUri: mongodb://localhost:27017/
+  databaseName: MyMTGLibrary
+  collectionName: Cards

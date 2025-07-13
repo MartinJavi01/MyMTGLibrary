@@ -1,5 +1,6 @@
 package com.javi.martin.MyMTGLibrary.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javi.martin.MyMTGLibrary.dto.MTGCardDTO;
 import com.javi.martin.MyMTGLibrary.utils.ParametersStringBuilder;
@@ -13,6 +14,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
+
+import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.SCRYFALL_NAMED_PATH;
 
 @Service
 public class CardSearchService {
@@ -37,7 +40,7 @@ public class CardSearchService {
 
         try  {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://api.scryfall.com/cards/named" + ParametersStringBuilder.getParamsString(requestParams))).build();
+                    .uri(URI.create(SCRYFALL_NAMED_PATH + ParametersStringBuilder.getParamsString(requestParams))).build();
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             returnCard = objectMapper.readValue(response.body(), MTGCardDTO.class);
@@ -46,5 +49,9 @@ public class CardSearchService {
         }
 
         return returnCard;
+    }
+
+    public String returnCardAsJson(MTGCardDTO cardDTO) throws JsonProcessingException {
+        return objectMapper.writeValueAsString(cardDTO);
     }
 }

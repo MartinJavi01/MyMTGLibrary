@@ -2,16 +2,12 @@ package com.javi.martin.MyMTGLibrary.service;
 
 import com.javi.martin.MyMTGLibrary.dto.MTGCardDTO;
 import org.springframework.stereotype.Service;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.*;
 
-
-//http://eakett.ca/mtgimage/
 @Service
 public class CardUIPreparer {
 
@@ -52,7 +48,7 @@ public class CardUIPreparer {
             if (!insideKeysText[0].isEmpty()) {
                 returnString += insideKeysText[0];
             }
-            returnString += "<img class=\"symbolImage\" src=\"" + getSymbolApiUrl(insideKeysText[1].toLowerCase()) + "\"/>";
+            returnString += "<img class=\"symbolImage\" src=\"" + getSymbolApiUrl(insideKeysText[1]) + "\"/>";
         }
 
         returnString += splitedDescription[splitedDescription.length - 1];
@@ -61,12 +57,7 @@ public class CardUIPreparer {
     }
 
     private String getSymbolApiUrl(String symbol) {
-        if ((!symbol.contains("b") && !symbol.contains("g") && !symbol.contains("w")
-                && !symbol.contains("r") && !symbol.contains("u")) && !StringUtils.isNumeric(symbol)) {
-            return SYMBOL_API_BASE_URL + OTHER_PATH + symbol + SVG_EXTENSION;
-        } else {
-            return SYMBOL_API_BASE_URL + MANA_PATH + symbol.replace("/","") + SVG_EXTENSION;
-        }
+        return SCRYFALL_SVGS_PATH + SYMBOL_PATH + symbol.replace("/","") + SVG_EXTENSION;
     }
 
     private String prepareManaCost(String baseManaCost) {
@@ -74,7 +65,7 @@ public class CardUIPreparer {
         var splitedColors = baseManaCost.split("\\{");
         for (int i = 1; i < splitedColors.length; i ++) {
             finalManaCost += "<img class=\"symbolImage\" src=\"" +
-                    getSymbolApiUrl(splitedColors[i].replace("}", "").toLowerCase()) + "\"/>";
+                    getSymbolApiUrl(splitedColors[i].replace("}", "")) + "\"/>";
         }
 
         return finalManaCost;
@@ -84,9 +75,14 @@ public class CardUIPreparer {
         var finalString = "";
         var colorsList = new ArrayList<String>();
         for (int i = 0; i < colors.size(); i++) {
-            finalString += "<img class=\"symbolImage\" src=\"" + getSymbolApiUrl(colors.get(i).toLowerCase()) + "\"/>";
+            finalString += "<img class=\"symbolImage\" src=\"" + getSymbolApiUrl(colors.get(i)) + "\"/>";
         }
         colorsList.add(finalString);
         return colorsList;
+    }
+
+    private String prepareRarity(String rarity) {
+        //TODO
+        return "";
     }
 }

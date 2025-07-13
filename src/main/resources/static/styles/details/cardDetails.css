@@ -15,36 +15,84 @@ body {
     width: 35vh;
 }
 
-.detailsContainer {
+.horizontalContainer {
     display: flex;
     align-items: flex-start;
     margin-bottom: 2vh;
 }
 
-.cardDetailsInnerContainer {
+#imageDiv {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 30vw;
+}
+
+#detailsDiv {
     display: inline-block;
+    align-items: self-start;
     width: 50vw;
+    margin-left: 10vw;
 }
 
 .detailText {
-    white-space: pre-line;
+    white-space: nowrap;
     text-align: start;
     font-size: 3vh;
     margin-bottom: -2vh;
 }
 
 .detailInfo {
+    white-space: pre-line;
     margin-left: 1vw;
 }
 
 .symbolImage {
-    width: 2vw;
-    height: 2vh;
+    width: 4%;
+    height: 4%;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.cardRegisterUpdateDiv {
+    width: 30vw;
+    margin-left: 10vw;
+    display: inline-block;
+    align-items: flex-start;
+}
+
+.cardRegisterUpdateLabel {
+    font-size: 5vh;
+    margin-right: 2vw;
+    margin-top: 2vh;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.cardRegisterUpdateButton {
+    font-size: 3vh;
+    margin-top: 2vh;
+    white-space: nowrap;
+    text-align: center;
+}
+
+#copiesInput {
+    margin-top: 2vh;
+    margin-right: 2vw;
+    width: 5vw;
+    height: 5vh;
+    font-size: 4.5vh;
+}
+
+.updateDeleteButton {
+    width: 8vw;
+    height: 5vh;
+    margin-right: 5vw;
 }
 
 #footerDiv {
     position: absolute;
-    right: 0;
-    margin-right: 2vw;
+    left: 0;
+    margin-left: 1vw;
     bottom: 0;
 }

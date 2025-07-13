@@ -7,48 +7,68 @@
     <link th:href="@{/styles/details/cardDetails.css}" rel="stylesheet"/>
 </head>
 
-<body>
+<body onload="setInputValue()">
     <p th:text="${currentCard.name}" id="cardNameText">Card name</p>
-    <div class="detailsContainer">
-        <img th:src="${currentCard.imageUris.normal}" id="cardImageFull">
+    <div class="horizontalContainer">
+        <div class="verticalDiv" id="imageDiv" th:data-current-card="${dbCard}">
+            <img th:src="${currentCard.imageUris.normal}" id="cardImageFull">
 
-        <div class="cardDetailsInnerContainer">
-            <div class="detailsContainer">
+            <div th:if="${cardOnDb}" class="verticalDiv cardRegisterUpdateDiv">
+                <div class="horizontalContainer">
+                    <label class="cardRegisterUpdateLabel">Card copies: </label>
+                    <input type="number" id="copiesInput" th:data-copies="${copies}">
+                </div>
+                <div class="horizontalContainer">
+                    <button type="button" class="cardRegisterUpdateButton updateDeleteButton" th:attr="onclick=|updateCardDetails(true)|">Update</button>
+                    <button type="button" class="cardRegisterUpdateButton updateDeleteButton" th:attr="onclick=|updateCardDetails(false)|">Delete</button>
+                </div>
+            </div>
+            <div th:unless="${cardOnDb}" class="horizontalContainer cardRegisterUpdateDiv">
+                <label class="cardRegisterUpdateLabel">Card not registered</label>
+                <button type="button" class="cardRegisterUpdateButton" th:attr="onclick=|updateCardDetails(false)|">Save card</button>
+            </div>
+        </div>
+
+        <div class="verticalDiv" id="detailsDiv">
+            <div class="horizontalContainer">
                 <p class="detailText">Card type: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.typeLine}">Type</p>
             </div>
 
-            <div class="detailsContainer">
+            <div class="horizontalContainer">
                 <p class="detailText">Mana cost: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.manaCost}">Mana cost</p>
             </div>
 
-            <div class="detailsContainer">
+            <div class="horizontalContainer">
                 <p class="detailText">Color identity: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.colorIdentity.get(0)}">Color identity</p>
             </div>
 
-            <div class="detailsContainer">
+            <div class="horizontalContainer">
                 <p class="detailText">Cmc: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.cmc}">Cmc</p>
             </div>
 
-            <div class="detailsContainer">
+            <div class="horizontalContainer" th:if="${currentCard.power != null}">
                 <p class="detailText">Power: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.power}">Power</p>
             </div>
 
-            <div class="detailsContainer">
+            <div class="horizontalContainer" th:if="${currentCard.toughness != null}">
                 <p class="detailText">Toughness: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.toughness}">Thoughness</p>
             </div>
 
-            <div class="detailsContainer">
+            <div class="horizontalContainer">
                 <p class="detailText">Description: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.oracleText}">Description</p>
             </div>
         </div>
     </div>
+
+
+    <script src=" /js/details/cardDetails.js" type="text/javascript"></script>
 </body>
 
 <footer>
