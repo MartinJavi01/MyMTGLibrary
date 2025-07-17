@@ -5,11 +5,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.*;
 
 @Service
-public class CardUIPreparer {
+public class CardUIPreparerService {
 
     public MTGCardDTO prepareCard(MTGCardDTO cardToPrepare) {
         MTGCardDTO finalCard = cardToPrepare;
@@ -17,6 +18,8 @@ public class CardUIPreparer {
         finalCard.setOracleText(getNewLineUIDescription(finalCard.getOracleText()));
         finalCard.setOracleText(parseSymbolsToImage(finalCard.getOracleText()));
         finalCard.setManaCost(prepareManaCost(finalCard.getManaCost()));
+        finalCard.setCmc(finalCard.getCmc().substring(0,1));
+
         if (!finalCard.getColorIdentity().isEmpty()) {
             finalCard.setColorIdentity(prepareColorsString(finalCard.getColorIdentity()));
         } else {
@@ -24,6 +27,12 @@ public class CardUIPreparer {
             colorlessList.add("Colorless");
             finalCard.setColorIdentity(colorlessList);
         }
+
+        finalCard.getPrices().setUsd(getCostString(finalCard.getPrices().getUsd()));
+        finalCard.getPrices().setEur(getCostString(finalCard.getPrices().getEur()));
+
+        finalCard.setRarity(prepareRarity(finalCard.getRarity()));
+        finalCard.getSetDTO().setImageUri(prepareSetUriImage(finalCard.getSetDTO().getImageUri()));
 
         return finalCard;
     }
@@ -57,7 +66,7 @@ public class CardUIPreparer {
     }
 
     private String getSymbolApiUrl(String symbol) {
-        return SCRYFALL_SVGS_PATH + SYMBOL_PATH + symbol.replace("/","") + SVG_EXTENSION;
+        return SCRYFALL_SVGS_BASE_PATH + SYMBOL_PATH + symbol.replace("/","") + SVG_EXTENSION;
     }
 
     private String prepareManaCost(String baseManaCost) {
@@ -81,8 +90,15 @@ public class CardUIPreparer {
         return colorsList;
     }
 
+    private String getCostString(String s) {
+        return Objects.nonNull(s) ? s : "N/A";
+    }
+
     private String prepareRarity(String rarity) {
-        //TODO
-        return "";
+        return rarity.substring(0, 1).toUpperCase() + rarity.substring(1);
+    }
+
+    private String prepareSetUriImage(String setImageUri) {
+        return "<img class=\"setImage\" src=\"" + setImageUri + "\"/>";
     }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface CardLibraryRepository extends MongoRepository<MTGCardDTO, String> {
 
-    MTGCardDTO findItemByName(String name);
     List<MTGCardDTO> findAll();
+    MTGCardDTO findItemById(String id);
+    MTGCardDTO findItemByName(String name);
 }

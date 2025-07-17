@@ -35,7 +35,7 @@
                 <p class="detailText detailInfo" th:utext="${currentCard.typeLine}">Type</p>
             </div>
 
-            <div class="horizontalContainer">
+            <div th:unless="${currentCard.manaCost.isEmpty()}" class="horizontalContainer">
                 <p class="detailText">Mana cost: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.manaCost}">Mana cost</p>
             </div>
@@ -45,9 +45,20 @@
                 <p class="detailText detailInfo" th:utext="${currentCard.colorIdentity.get(0)}">Color identity</p>
             </div>
 
-            <div class="horizontalContainer">
+            <div th:unless="${currentCard.manaCost.isEmpty()}" class="horizontalContainer">
                 <p class="detailText">Cmc: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.cmc}">Cmc</p>
+            </div>
+
+            <div class="horizontalContainer">
+                <p class="detailText">Rarity: </p>
+                <p class="detailText detailInfo" th:utext="${currentCard.rarity}">Rarity</p>
+            </div>
+
+            <div class="horizontalContainer">
+                <p class="detailText">Set: </p>
+                <p class="detailText detailInfo setImage" th:utext="${currentCard.setDTO.imageUri}">Set image</p>
+                <p class="detailText detailInfo" th:utext="${currentCard.setDTO.setName}">Set name</p>
             </div>
 
             <div class="horizontalContainer" th:if="${currentCard.power != null}">
@@ -64,15 +75,28 @@
                 <p class="detailText">Description: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.oracleText}">Description</p>
             </div>
+
+            <div class="horizontalContainer">
+                <p class="detailText">EUR Price: </p>
+                <p class="detailText detailInfo" th:utext="${currentCard.prices.eur}">EUR price</p>
+            </div>
+
+            <div class="horizontalContainer">
+                <p class="detailText">USD Price: </p>
+                <p class="detailText detailInfo" th:utext="${currentCard.prices.usd}">USD price</p>
+            </div>
+
+            <div class="horizontalContainer">
+                <a class="detailText" th:href="${currentCard.purchaseUris.cardmarket}">Cardmarket</a>
+            </div>
         </div>
     </div>
 
+    <footer id="footer">
+            <div th:insert="common/footer :: footerFragment"></div>
+    </footer>
 
     <script src=" /js/details/cardDetails.js" type="text/javascript"></script>
 </body>
-
-<footer>
-  <div th:insert="common/footer :: footerFragment"></div>
-</footer>
 
 </html>

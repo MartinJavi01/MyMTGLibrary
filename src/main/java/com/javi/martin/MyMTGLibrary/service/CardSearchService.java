@@ -3,6 +3,7 @@ package com.javi.martin.MyMTGLibrary.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javi.martin.MyMTGLibrary.dto.MTGCardDTO;
+import com.javi.martin.MyMTGLibrary.dto.MTGSetDTO;
 import com.javi.martin.MyMTGLibrary.utils.ParametersStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +16,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
 
-import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.SCRYFALL_NAMED_PATH;
+import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.*;
 
 @Service
 public class CardSearchService {
@@ -40,7 +41,7 @@ public class CardSearchService {
 
         try  {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(SCRYFALL_NAMED_PATH + ParametersStringBuilder.getParamsString(requestParams))).build();
+                    .uri(URI.create(SCRYFALL_BASE_PATH + NAMED_PATH + ParametersStringBuilder.getParamsString(requestParams))).build();
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             returnCard = objectMapper.readValue(response.body(), MTGCardDTO.class);
@@ -48,7 +49,45 @@ public class CardSearchService {
             throw new RuntimeException(e);
         }
 
+        returnCard.setSetDTO(getSetForCard(returnCard));
+
         return returnCard;
+    }
+
+    public MTGCardDTO searchCardById(String id) {
+        var client = HttpClient.newHttpClient();
+        MTGCardDTO returnCard;
+
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(SCRYFALL_BASE_PATH + ID_PATH + id)).build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            returnCard = objectMapper.readValue(response.body(), MTGCardDTO.class);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        returnCard.setSetDTO(getSetForCard(returnCard));
+
+        return returnCard;
+    }
+
+    public MTGSetDTO getSetForCard(MTGCardDTO card) {
+        var client = HttpClient.newHttpClient();
+        MTGSetDTO returnSet;
+
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(SCRYFALL_BASE_PATH + SETS_PATH + card.getSet())).build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            returnSet = objectMapper.readValue(response.body(), MTGSetDTO.class);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return returnSet;
     }
 
     public String returnCardAsJson(MTGCardDTO cardDTO) throws JsonProcessingException {

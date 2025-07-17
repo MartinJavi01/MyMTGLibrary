@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My collection</title>
+    <link th:href="@{/styles/collection/collection.css}" rel="stylesheet"/>
+</head>
+
+<body>
+    <p id="collectionTitleText">My collection</p>
+    <tr th:if="${cards.isEmpty()}">
+        <td id="noCardsText">No cards saved, nothing to show!</td>
+    </tr>
+    <tr th:each="card: ${cards}">
+        <div class="cardDiv">
+            <a th:href="|http://localhost:8010/details/id/${card.id}|"><img th:src="${card.imageUris.normal}" class="cardImage"></a>
+            <p class="copiesText" th:text="|Copies: ${card.copies}|">Copies</p>
+        </div>
+    </tr>
+</body>
