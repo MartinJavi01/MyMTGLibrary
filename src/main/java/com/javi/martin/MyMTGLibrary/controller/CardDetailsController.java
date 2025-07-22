@@ -41,6 +41,11 @@ public class CardDetailsController {
         model.addAttribute("copies", "" + dbCard.getCopies());
         model.addAttribute("currentCard", apiCard);
 
+        if (preparer.isDoubleCard(dbCard)) {
+            model.addAttribute("currentFace", 1);
+        } else {
+            model.addAttribute("currentFace", -1);
+        }
         return "details/cardDetails";
     }
 

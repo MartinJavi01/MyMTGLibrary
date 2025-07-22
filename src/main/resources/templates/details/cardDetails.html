@@ -11,7 +11,8 @@
     <p th:text="${currentCard.name}" id="cardNameText">Card name</p>
     <div class="horizontalContainer">
         <div class="verticalDiv" id="imageDiv" th:data-current-card="${dbCard}">
-            <img th:src="${currentCard.imageUris.normal}" id="cardImageFull">
+            <img th:if="${currentFace >= 0}" th:src="${currentCard.cardFaces.get(currentFace).imageUris.normal}" id="cardImageFull">
+            <img th:if="${currentFace < 0}" th:src="${currentCard.imageUris.normal}" id="cardImageFull">
 
             <div th:if="${cardOnDb}" class="verticalDiv cardRegisterUpdateDiv">
                 <div class="horizontalContainer">
@@ -35,9 +36,14 @@
                 <p class="detailText detailInfo" th:utext="${currentCard.typeLine}">Type</p>
             </div>
 
-            <div th:unless="${currentCard.manaCost.isEmpty()}" class="horizontalContainer">
+            <div th:if="${currentCard.cardFaces == null}" th:unless="${currentCard.manaCost.isEmpty()}" class="horizontalContainer">
                 <p class="detailText">Mana cost: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.manaCost}">Mana cost</p>
+            </div>
+
+            <div th:if="${currentCard.cardFaces != null}" th:unless="${currentCard.cardFaces.get(currentFace).manaCost.isEmpty()}" class="horizontalContainer">
+                <p class="detailText">Mana cost: </p>
+                <p class="detailText detailInfo" th:utext="${currentCard.cardFaces.get(currentFace).manaCost}">Mana cost</p>
             </div>
 
             <div class="horizontalContainer">
@@ -45,7 +51,7 @@
                 <p class="detailText detailInfo" th:utext="${currentCard.colorIdentity.get(0)}">Color identity</p>
             </div>
 
-            <div th:unless="${currentCard.manaCost.isEmpty()}" class="horizontalContainer">
+            <div th:unless="${currentCard.cmc.isEmpty()}" class="horizontalContainer">
                 <p class="detailText">Cmc: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.cmc}">Cmc</p>
             </div>
@@ -61,19 +67,30 @@
                 <p class="detailText detailInfo" th:utext="${currentCard.setDTO.setName}">Set name</p>
             </div>
 
-            <div class="horizontalContainer" th:if="${currentCard.power != null}">
+            <div class="horizontalContainer" th:if="${currentCard.cardFaces == null and currentCard.power != null}">
                 <p class="detailText">Power: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.power}">Power</p>
             </div>
 
-            <div class="horizontalContainer" th:if="${currentCard.toughness != null}">
+            <div class="horizontalContainer" th:if="${currentCard.cardFaces != null and currentCard.cardFaces.get(currentFace).power != null}">
+                <p class="detailText">Power: </p>
+                <p class="detailText detailInfo" th:utext="${currentCard.cardFaces.get(currentFace).power}">Power</p>
+            </div>
+
+            <div class="horizontalContainer" th:if="${currentCard.cardFaces == null and currentCard.toughness != null}">
                 <p class="detailText">Toughness: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.toughness}">Thoughness</p>
             </div>
 
+            <div class="horizontalContainer" th:if="${currentCard.cardFaces != null and currentCard.cardFaces.get(currentFace).toughness != null}">
+                <p class="detailText">Toughness: </p>
+                <p class="detailText detailInfo" th:utext="${currentCard.cardFaces.get(currentFace).toughness}">Thoughness</p>
+            </div>
+
             <div class="horizontalContainer">
                 <p class="detailText">Description: </p>
-                <p class="detailText detailInfo" th:utext="${currentCard.oracleText}">Description</p>
+                <p th:if="${currentCard.cardFaces == null}" class="detailText detailInfo" th:utext="${currentCard.oracleText}">Description</p>
+                <p th:if="${currentCard.cardFaces != null}" class="detailText detailInfo" th:utext="${currentCard.cardFaces.get(currentFace).oracleText}">Description</p>
             </div>
 
             <div class="horizontalContainer">

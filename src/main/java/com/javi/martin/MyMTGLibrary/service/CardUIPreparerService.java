@@ -13,28 +13,47 @@ import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.*;
 public class CardUIPreparerService {
 
     public MTGCardDTO prepareCard(MTGCardDTO cardToPrepare) {
-        MTGCardDTO finalCard = cardToPrepare;
+        cardToPrepare.setCmc(cardToPrepare.getCmc().substring(0,1));
 
-        finalCard.setOracleText(getNewLineUIDescription(finalCard.getOracleText()));
-        finalCard.setOracleText(parseSymbolsToImage(finalCard.getOracleText()));
-        finalCard.setManaCost(prepareManaCost(finalCard.getManaCost()));
-        finalCard.setCmc(finalCard.getCmc().substring(0,1));
-
-        if (!finalCard.getColorIdentity().isEmpty()) {
-            finalCard.setColorIdentity(prepareColorsString(finalCard.getColorIdentity()));
+        if (!cardToPrepare.getColorIdentity().isEmpty()) {
+            cardToPrepare.setColorIdentity(prepareColorsString(cardToPrepare.getColorIdentity()));
         } else {
             var colorlessList = new ArrayList<String>();
             colorlessList.add("Colorless");
-            finalCard.setColorIdentity(colorlessList);
+            cardToPrepare.setColorIdentity(colorlessList);
         }
 
-        finalCard.getPrices().setUsd(getCostString(finalCard.getPrices().getUsd()));
-        finalCard.getPrices().setEur(getCostString(finalCard.getPrices().getEur()));
+        cardToPrepare.getPrices().setUsd(getCostString(cardToPrepare.getPrices().getUsd()));
+        cardToPrepare.getPrices().setEur(getCostString(cardToPrepare.getPrices().getEur()));
 
-        finalCard.setRarity(prepareRarity(finalCard.getRarity()));
-        finalCard.getSetDTO().setImageUri(prepareSetUriImage(finalCard.getSetDTO().getImageUri()));
+        cardToPrepare.setRarity(prepareRarity(cardToPrepare.getRarity()));
+        cardToPrepare.getSetDTO().setImageUri(prepareSetUriImage(cardToPrepare.getSetDTO().getImageUri()));
 
-        return finalCard;
+
+        return isDoubleCard(cardToPrepare) ? prepareDoubleFacedCard(cardToPrepare) : prepareOneFaceCard(cardToPrepare);
+    }
+
+    public boolean isDoubleCard(MTGCardDTO card) {
+        return Objects.nonNull(card.getCardFaces());
+    }
+
+    private MTGCardDTO prepareOneFaceCard(MTGCardDTO cardToPrepare) {
+        cardToPrepare.setOracleText(getNewLineUIDescription(cardToPrepare.getOracleText()));
+        cardToPrepare.setOracleText(parseSymbolsToImage(cardToPrepare.getOracleText()));
+        cardToPrepare.setManaCost(prepareManaCost(cardToPrepare.getManaCost()));
+
+        return cardToPrepare;
+    }
+
+    private MTGCardDTO prepareDoubleFacedCard(MTGCardDTO cardToPrepare) {
+        for(int i = 0; i < cardToPrepare.getCardFaces().size(); i++) {
+            var cardFace = cardToPrepare.getCardFaces().get(i);
+            cardToPrepare.getCardFaces().get(i).setOracleText(getNewLineUIDescription(cardFace.getOracleText()));
+            cardToPrepare.getCardFaces().get(i).setOracleText(parseSymbolsToImage(cardFace.getOracleText()));
+            cardToPrepare.getCardFaces().get(i).setManaCost(prepareManaCost(cardFace.getManaCost()));
+        }
+
+        return cardToPrepare;
     }
 
     private String getNewLineUIDescription(String baseDescription) {
