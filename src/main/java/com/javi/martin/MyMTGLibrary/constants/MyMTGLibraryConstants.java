@@ -2,7 +2,7 @@ package com.javi.martin.MyMTGLibrary.constants;
 
 public class MyMTGLibraryConstants {
 
-    public static final String CURRENT_VERSION = "0.1.0";
+    public static final String CURRENT_VERSION = "0.2.0";
 
     public static final String SCRYFALL_BASE_PATH = "https://api.scryfall.com/";
     public static final String NAMED_PATH = "cards/named";
