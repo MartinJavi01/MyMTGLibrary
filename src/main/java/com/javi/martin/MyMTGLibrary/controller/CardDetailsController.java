@@ -35,17 +35,39 @@ public class CardDetailsController {
         apiCard = preparer.prepareCard(apiCard);
         if (Objects.isNull(dbCard)) {
             dbCard = cardSearchService.searchCardByName(cardName);
+        } else {
+            model.addAttribute("copies", "" + dbCard.getCopies());
         }
 
         model.addAttribute("dbCard", cardSearchService.returnCardAsJson(dbCard));
-        model.addAttribute("copies", "" + dbCard.getCopies());
         model.addAttribute("currentCard", apiCard);
 
         if (preparer.isDoubleCard(dbCard)) {
-            model.addAttribute("currentFace", 1);
+            model.addAttribute("currentFace", 0);
         } else {
             model.addAttribute("currentFace", -1);
         }
+        return "details/cardDetails";
+    }
+
+    @RequestMapping("/id/{id}/{cardFace}")
+    public String getCardDetailsByIdAndSide(Model model, @PathVariable String id, @PathVariable int cardFace) throws JsonProcessingException {
+        model.addAttribute("version", "Current version: " + CURRENT_VERSION);
+
+        var apiCard = cardSearchService.searchCardById(id);
+        var dbCard = cardDBSearchService.getCardById(id);
+        model.addAttribute("cardOnDb", Objects.nonNull(dbCard));
+        apiCard = preparer.prepareCard(apiCard);
+        if (Objects.isNull(dbCard)) {
+            dbCard = cardSearchService.searchCardById(id);
+        } else {
+            model.addAttribute("copies", "" + dbCard.getCopies());
+        }
+
+        model.addAttribute("dbCard", cardSearchService.returnCardAsJson(dbCard));
+        model.addAttribute("currentCard", apiCard);
+
+        model.addAttribute("currentFace", cardFace);
         return "details/cardDetails";
     }
 
@@ -58,11 +80,12 @@ public class CardDetailsController {
         model.addAttribute("cardOnDb", Objects.nonNull(dbCard));
         apiCard = preparer.prepareCard(apiCard);
         if (Objects.isNull(dbCard)) {
-            dbCard = cardDBSearchService.getCardById(id);
+            dbCard = cardSearchService.searchCardById(id);
+        } else {
+            model.addAttribute("copies", "" + dbCard.getCopies());
         }
 
         model.addAttribute("dbCard", cardSearchService.returnCardAsJson(dbCard));
-        model.addAttribute("copies", "" + dbCard.getCopies());
         model.addAttribute("currentCard", apiCard);
 
         return "details/cardDetails";

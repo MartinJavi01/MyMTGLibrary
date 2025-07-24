@@ -1,5 +1,18 @@
 var currentCard = document.getElementById("imageDiv").dataset.currentCard;
 
+function init() {
+    if (document.getElementById("copiesInput") !== null) {
+        document.getElementById("copiesInput").value = document.getElementById("copiesInput").dataset.copies;
+    }
+}
+
+function changeSide(currentFace, cardId) {
+    currentFace = (currentFace == 0) ? 1 : 0;
+    var redirectionId = '' + cardId;
+    redirectionId = redirectionId.substring(1, redirectionId.length-1);
+    window.location.replace('http://localhost:8010/details/id/' + redirectionId + "/" + currentFace)
+}
+
 async function updateCardDetails(saved) {
     var currentCopies;
 
@@ -14,6 +27,8 @@ async function updateCardDetails(saved) {
     } else {
         currentCopies = 1;
     }
+
+    console.log(currentCard)
 
     await fetch('http://localhost:8010/update-card?copies=' + currentCopies, {
         method: 'POST',
@@ -36,10 +51,4 @@ async function updateCardDetails(saved) {
         .catch((error) => {
         console.error('There was an error updating the DB:', error);
         });
-}
-
-function setInputValue() {
-    if (document.getElementById("copiesInput") !== null) {
-        document.getElementById("copiesInput").value = document.getElementById("copiesInput").dataset.copies;
-    }
 }
