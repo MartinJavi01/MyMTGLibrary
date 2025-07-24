@@ -1,5 +1,14 @@
 body {
     background-color: gray;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#mainContainer {
+    position: relative;
+    min-height: 100vh;
 }
 
 #cardNameText {
@@ -11,8 +20,17 @@ body {
 
 #cardImageFull {
     margin-right: 5vw;
-    margin-left: 10vw;
-    width: 35vh;
+    margin-left: 5vw;
+    width: 20vw;
+    align-self: center;
+}
+
+#changeSideButton {
+    height: 5vh;
+    width: auto;
+    align-self: center;
+    font-size: 4.5vh;
+    margin-top: -3vh;
 }
 
 .horizontalContainer {
@@ -48,16 +66,22 @@ body {
 }
 
 .symbolImage {
-    width: 4%;
-    height: 4%;
+    width: auto;
+    height: 3vh;
     margin-right: 0px;
     margin-left: 0px;
 }
 
-.cardRegisterUpdateDiv {
+.setImage {
+    width: auto;
+    height: 3vh;
+}
+
+#cardRegisterUpdateDiv {
     width: 30vw;
     margin-left: 10vw;
     display: inline-block;
+    align-self: center;
     align-items: flex-start;
 }
 
@@ -74,6 +98,7 @@ body {
     margin-top: 2vh;
     white-space: nowrap;
     text-align: center;
+    vertical-align: middle;
 }
 
 #copiesInput {
@@ -87,12 +112,14 @@ body {
 .updateDeleteButton {
     width: 8vw;
     height: 5vh;
-    margin-right: 5vw;
+    margin-right: 3vw;
 }
 
-#footerDiv {
-    position: absolute;
-    left: 0;
-    margin-left: 1vw;
-    bottom: 0;
+#footer {
+    margin-top: 5vh;
+    height: 10vh;
+    width: auto;
+    padding: 1vw;
+    fill: rgb(211, 211, 211);
+    background-color: rgb(211, 211, 211);
 }

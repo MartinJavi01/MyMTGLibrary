@@ -7,13 +7,16 @@
     <link th:href="@{/styles/details/cardDetails.css}" rel="stylesheet"/>
 </head>
 
-<body onload="setInputValue()">
+<body th:attr="onload=|init(${currentFace})|">
     <p th:text="${currentCard.name}" id="cardNameText">Card name</p>
     <div class="horizontalContainer">
         <div class="verticalDiv" id="imageDiv" th:data-current-card="${dbCard}">
-            <img th:src="${currentCard.imageUris.normal}" id="cardImageFull">
+            <img th:if="${currentFace >= 0}" th:src="${currentCard.cardFaces.get(currentFace).imageUris.normal}" id="cardImageFull">
+            <button th:if="${currentFace >= 0}" id="changeSideButton" th:attr="onclick=|changeSide(${currentFace},'+${currentCard.id}+')|">Change side</button>
+            
+            <img th:if="${currentFace < 0}" th:src="${currentCard.imageUris.normal}" id="cardImageFull">
 
-            <div th:if="${cardOnDb}" class="verticalDiv cardRegisterUpdateDiv">
+            <div th:if="${cardOnDb}" class="verticalDiv" id="cardRegisterUpdateDiv">
                 <div class="horizontalContainer">
                     <label class="cardRegisterUpdateLabel">Card copies: </label>
                     <input type="number" id="copiesInput" th:data-copies="${copies}">
@@ -35,9 +38,14 @@
                 <p class="detailText detailInfo" th:utext="${currentCard.typeLine}">Type</p>
             </div>
 
-            <div class="horizontalContainer">
+            <div th:if="${currentFace < 0}" th:unless="${currentCard.manaCost.isEmpty()}" class="horizontalContainer">
                 <p class="detailText">Mana cost: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.manaCost}">Mana cost</p>
+            </div>
+
+            <div th:if="${currentFace >= 0}" th:unless="${currentCard.cardFaces.get(currentFace).manaCost.isEmpty()}" class="horizontalContainer">
+                <p class="detailText">Mana cost: </p>
+                <p class="detailText detailInfo" th:utext="${currentCard.cardFaces.get(currentFace).manaCost}">Mana cost</p>
             </div>
 
             <div class="horizontalContainer">
@@ -45,34 +53,69 @@
                 <p class="detailText detailInfo" th:utext="${currentCard.colorIdentity.get(0)}">Color identity</p>
             </div>
 
-            <div class="horizontalContainer">
+            <div th:unless="${currentCard.cmc.isEmpty()}" class="horizontalContainer">
                 <p class="detailText">Cmc: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.cmc}">Cmc</p>
             </div>
 
-            <div class="horizontalContainer" th:if="${currentCard.power != null}">
+            <div class="horizontalContainer">
+                <p class="detailText">Rarity: </p>
+                <p class="detailText detailInfo" th:utext="${currentCard.rarity}">Rarity</p>
+            </div>
+
+            <div class="horizontalContainer">
+                <p class="detailText">Set: </p>
+                <p class="detailText detailInfo setImage" th:utext="${currentCard.setDTO.imageUri}">Set image</p>
+                <p class="detailText detailInfo" th:utext="${currentCard.setDTO.setName}">Set name</p>
+            </div>
+
+            <div class="horizontalContainer" th:if="${currentFace < 0 and currentCard.power != null}">
                 <p class="detailText">Power: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.power}">Power</p>
             </div>
 
-            <div class="horizontalContainer" th:if="${currentCard.toughness != null}">
+            <div class="horizontalContainer" th:if="${currentFace >= 0 and currentCard.cardFaces.get(currentFace).power != null}">
+                <p class="detailText">Power: </p>
+                <p class="detailText detailInfo" th:utext="${currentCard.cardFaces.get(currentFace).power}">Power</p>
+            </div>
+
+            <div class="horizontalContainer" th:if="${currentFace < 0 and currentCard.toughness != null}">
                 <p class="detailText">Toughness: </p>
                 <p class="detailText detailInfo" th:utext="${currentCard.toughness}">Thoughness</p>
             </div>
 
+            <div class="horizontalContainer" th:if="${currentFace >= 0 and currentCard.cardFaces.get(currentFace).toughness != null}">
+                <p class="detailText">Toughness: </p>
+                <p class="detailText detailInfo" th:utext="${currentCard.cardFaces.get(currentFace).toughness}">Thoughness</p>
+            </div>
+
             <div class="horizontalContainer">
                 <p class="detailText">Description: </p>
-                <p class="detailText detailInfo" th:utext="${currentCard.oracleText}">Description</p>
+                <p th:if="${currentFace < 0}" class="detailText detailInfo" th:utext="${currentCard.oracleText}">Description</p>
+                <p th:if="${currentFace >= 0}" class="detailText detailInfo" th:utext="${currentCard.cardFaces.get(currentFace).oracleText}">Description</p>
+            </div>
+
+            <div class="horizontalContainer">
+                <p class="detailText">EUR Price: </p>
+                <p class="detailText detailInfo" th:utext="${currentCard.prices.eur}">EUR price</p>
+            </div>
+
+            <div class="horizontalContainer">
+                <p class="detailText">USD Price: </p>
+                <p class="detailText detailInfo" th:utext="${currentCard.prices.usd}">USD price</p>
+            </div>
+
+            <div class="horizontalContainer">
+                <a class="detailText" th:href="${currentCard.purchaseUris.cardmarket}">Cardmarket</a>
             </div>
         </div>
     </div>
 
+    <footer id="footer">
+            <div th:insert="common/footer :: footerFragment"></div>
+    </footer>
 
     <script src=" /js/details/cardDetails.js" type="text/javascript"></script>
 </body>
-
-<footer>
-  <div th:insert="common/footer :: footerFragment"></div>
-</footer>
 
 </html>

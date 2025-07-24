@@ -3,19 +3,18 @@ package com.javi.martin.MyMTGLibrary.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.smartcardio.Card;
 import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
 @Document(collection = "Cards")
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Getter
-@Setter
+@Data
 public class MTGCardDTO {
 
     @Id
@@ -30,7 +29,7 @@ public class MTGCardDTO {
     @JsonProperty("released_at")
     private Date releasedAt;
     @JsonProperty("image_uris")
-    private ImageUris imageUris;
+    private ImageUrisDTO imageUris;
     @JsonProperty("mana_cost")
     private String manaCost;
     @JsonProperty("cmc")
@@ -57,10 +56,19 @@ public class MTGCardDTO {
     private String setId;
     @JsonProperty("set_name")
     private String setName;
+    @JsonProperty("prices")
+    private PricesDTO prices;
+    @JsonProperty("purchase_uris")
+    private PurchaseUrisDTO purchaseUris;
+    @JsonProperty("card_faces")
+    private List<CardFaceDTO> cardFaces;
 
+    private MTGSetDTO setDTO;
     private int copies;
+    private boolean foil;
 
     public MTGCardDTO() {
         copies = 1;
+        foil = false;
     }
 }

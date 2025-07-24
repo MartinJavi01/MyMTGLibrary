@@ -5,27 +5,55 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.*;
 
 @Service
-public class CardUIPreparer {
+public class CardUIPreparerService {
 
     public MTGCardDTO prepareCard(MTGCardDTO cardToPrepare) {
-        MTGCardDTO finalCard = cardToPrepare;
+        cardToPrepare.setCmc(cardToPrepare.getCmc().substring(0,1));
 
-        finalCard.setOracleText(getNewLineUIDescription(finalCard.getOracleText()));
-        finalCard.setOracleText(parseSymbolsToImage(finalCard.getOracleText()));
-        finalCard.setManaCost(prepareManaCost(finalCard.getManaCost()));
-        if (!finalCard.getColorIdentity().isEmpty()) {
-            finalCard.setColorIdentity(prepareColorsString(finalCard.getColorIdentity()));
+        if (!cardToPrepare.getColorIdentity().isEmpty()) {
+            cardToPrepare.setColorIdentity(prepareColorsString(cardToPrepare.getColorIdentity()));
         } else {
             var colorlessList = new ArrayList<String>();
             colorlessList.add("Colorless");
-            finalCard.setColorIdentity(colorlessList);
+            cardToPrepare.setColorIdentity(colorlessList);
         }
 
-        return finalCard;
+        cardToPrepare.getPrices().setUsd(getCostString(cardToPrepare.getPrices().getUsd()));
+        cardToPrepare.getPrices().setEur(getCostString(cardToPrepare.getPrices().getEur()));
+
+        cardToPrepare.setRarity(prepareRarity(cardToPrepare.getRarity()));
+        cardToPrepare.getSetDTO().setImageUri(prepareSetUriImage(cardToPrepare.getSetDTO().getImageUri()));
+
+
+        return isDoubleCard(cardToPrepare) ? prepareDoubleFacedCard(cardToPrepare) : prepareOneFaceCard(cardToPrepare);
+    }
+
+    public boolean isDoubleCard(MTGCardDTO card) {
+        return Objects.nonNull(card.getCardFaces());
+    }
+
+    private MTGCardDTO prepareOneFaceCard(MTGCardDTO cardToPrepare) {
+        cardToPrepare.setOracleText(getNewLineUIDescription(cardToPrepare.getOracleText()));
+        cardToPrepare.setOracleText(parseSymbolsToImage(cardToPrepare.getOracleText()));
+        cardToPrepare.setManaCost(prepareManaCost(cardToPrepare.getManaCost()));
+
+        return cardToPrepare;
+    }
+
+    private MTGCardDTO prepareDoubleFacedCard(MTGCardDTO cardToPrepare) {
+        for(int i = 0; i < cardToPrepare.getCardFaces().size(); i++) {
+            var cardFace = cardToPrepare.getCardFaces().get(i);
+            cardToPrepare.getCardFaces().get(i).setOracleText(getNewLineUIDescription(cardFace.getOracleText()));
+            cardToPrepare.getCardFaces().get(i).setOracleText(parseSymbolsToImage(cardFace.getOracleText()));
+            cardToPrepare.getCardFaces().get(i).setManaCost(prepareManaCost(cardFace.getManaCost()));
+        }
+
+        return cardToPrepare;
     }
 
     private String getNewLineUIDescription(String baseDescription) {
@@ -57,7 +85,7 @@ public class CardUIPreparer {
     }
 
     private String getSymbolApiUrl(String symbol) {
-        return SCRYFALL_SVGS_PATH + SYMBOL_PATH + symbol.replace("/","") + SVG_EXTENSION;
+        return SCRYFALL_SVGS_BASE_PATH + SYMBOL_PATH + symbol.replace("/","") + SVG_EXTENSION;
     }
 
     private String prepareManaCost(String baseManaCost) {
@@ -81,8 +109,15 @@ public class CardUIPreparer {
         return colorsList;
     }
 
+    private String getCostString(String s) {
+        return Objects.nonNull(s) ? s : "N/A";
+    }
+
     private String prepareRarity(String rarity) {
-        //TODO
-        return "";
+        return rarity.substring(0, 1).toUpperCase() + rarity.substring(1);
+    }
+
+    private String prepareSetUriImage(String setImageUri) {
+        return "<img class=\"setImage\" src=\"" + setImageUri + "\"/>";
     }
 }
