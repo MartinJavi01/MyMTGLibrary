@@ -16,7 +16,8 @@ body {
 }
 
 .cardDiv {
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
 }
 
 .cardImage {
@@ -25,6 +26,13 @@ body {
     margin-left: 2vw;
     margin-right: 2vw;
     margin-top: 2vh;
+}
+
+.changeSideButton {
+    align-self: center;
+    height: 4vh;
+    width: auto;
+    margin-top: -2vh;
 }
 
 .copiesText {

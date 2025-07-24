@@ -88,6 +88,12 @@ public class CardDetailsController {
         model.addAttribute("dbCard", cardSearchService.returnCardAsJson(dbCard));
         model.addAttribute("currentCard", apiCard);
 
+        if (preparer.isDoubleCard(dbCard)) {
+            model.addAttribute("currentFace", 0);
+        } else {
+            model.addAttribute("currentFace", -1);
+        }
+
         return "details/cardDetails";
     }
 }

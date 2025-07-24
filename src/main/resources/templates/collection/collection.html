@@ -14,7 +14,12 @@
     </tr>
     <tr th:each="card: ${cards}">
         <div class="cardDiv">
-            <a th:href="|http://localhost:8010/details/id/${card.id}|"><img th:src="${card.imageUris.normal}" class="cardImage"></a>
+            <a th:href="|http://localhost:8010/details/id/${card.id}|">
+                <img th:if="${card.cardFaces == null}" th:src="${card.imageUris.normal}" class="cardImage">
+                <img th:if="${card.cardFaces != null}" th:id="${card.id}" th:src="${card.cardFaces.get(0).imageUris.normal}" class="cardImage">
+            </a>
+            <button th:if="${card.cardFaces != null}" class="changeSideButton" 
+                    th:attr="onclick=|changeSideOfCardById('+${card.id}+','+${card.cardFaces.get(0).imageUris.normal}+','+${card.cardFaces.get(1).imageUris.normal}+')|">change</button>
             <p class="copiesText" th:text="|Copies: ${card.copies}|">Copies</p>
         </div>
     </tr>
