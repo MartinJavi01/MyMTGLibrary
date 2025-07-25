@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <title>CardDetails</title>
     <link th:href="@{/styles/details/cardDetails.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/common/menuNav.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/common/footer.css}" rel="stylesheet"/>
 </head>
 
 <body th:attr="onload=|init(${currentFace})|">
+    <div th:insert="common/menuNav :: menuNavFragment"></div>
+
     <p th:text="${currentCard.name}" id="cardNameText">Card name</p>
     <div class="horizontalContainer">
         <div class="verticalDiv" id="imageDiv" th:data-current-card="${dbCard}">

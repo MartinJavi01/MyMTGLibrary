@@ -5,9 +5,12 @@
   <meta charset="UTF-8">
   <title>Home</title>
   <link th:href="@{/styles/home/home.css}" rel="stylesheet"/>
+  <link th:href="@{/styles/common/menuNav.css}" rel="stylesheet"/>
+  <link th:href="@{/styles/common/footer.css}" rel="stylesheet"/>
 </head>
 
 <body>
+  <div th:insert="common/menuNav :: menuNavFragment"></div>
   <h1>Welcome to MyMTGLibrary</h1>
   <button>List all cards</button>
   <input placeholder="Search a card">

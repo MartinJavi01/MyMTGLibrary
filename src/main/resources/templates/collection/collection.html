@@ -5,9 +5,12 @@
     <meta charset="UTF-8">
     <title>My collection</title>
     <link th:href="@{/styles/collection/collection.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/common/menuNav.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/common/footer.css}" rel="stylesheet"/>
 </head>
 
 <body onload="checkToReloadPage()">
+    <div th:insert="common/menuNav :: menuNavFragment"></div>
     <p id="collectionTitleText">My collection</p>
     <tr th:if="${cards.isEmpty()}">
         <td id="noCardsText">No cards saved, nothing to show!</td>
