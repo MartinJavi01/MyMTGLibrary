@@ -1,11 +1,17 @@
 body {
     background-color: gray;
+    margin: 0;
+}
+
+#pageContainer {
+    position: relative;
+    min-height: 100vh;
 }
 
 #collectionTitleText {
     font-size: 7vh;
     text-align: center;
-    margin-top: 0vh;
+    margin-top: 1vh;
     margin-bottom: 5vh;
 }
 

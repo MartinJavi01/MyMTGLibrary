@@ -1,12 +1,9 @@
 body {
     background-color: gray;
     margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
 }
 
-#mainContainer {
+#pageContainer {
     position: relative;
     min-height: 100vh;
 }
@@ -14,7 +11,7 @@ body {
 #cardNameText {
     font-size: 7vh;
     text-align: center;
-    margin-top: 0vh;
+    margin-top: 1vh;
     margin-bottom: 5vh;
 }
 
@@ -113,13 +110,4 @@ body {
     width: 8vw;
     height: 5vh;
     margin-right: 3vw;
-}
-
-#footer {
-    margin-top: 5vh;
-    height: 10vh;
-    width: auto;
-    padding: 1vw;
-    fill: rgb(211, 211, 211);
-    background-color: rgb(211, 211, 211);
 }

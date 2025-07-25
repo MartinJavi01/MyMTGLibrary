@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.CURRENT_VERSION;
+
 @Controller
 @RequestMapping("/collection")
 public class CollectionController {
@@ -16,7 +18,7 @@ public class CollectionController {
 
     @GetMapping
     public String showAllCollection(Model model) {
-
+        model.addAttribute("version", "Current version: " + CURRENT_VERSION);
         model.addAttribute("cards", cardDBSearchService.getAllCards());
 
         return "collection/collection";
