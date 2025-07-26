@@ -9,8 +9,8 @@
     <div th:fragment="menuNavFragment">
         <div id="nav" class="navDiv">
             <a onclick="closeNav()" class="closeBtn">&times;</a>
-            <p class="quickSearchText">Quick search:</p>
-            <input type="text" class="quickSearchInput" placeholder="Enter a id or a card name">
+            <p id="cardSearchText">Card search:</p>
+            <input type="text" id="cardSearchInput" placeholder="Enter a card id or a name">
             <a href="/home">Home</a>
             <a href="/collection">Collection</a>
             <a>My decks</a>

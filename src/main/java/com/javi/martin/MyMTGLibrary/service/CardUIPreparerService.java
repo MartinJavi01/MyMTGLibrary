@@ -13,6 +13,7 @@ import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.*;
 public class CardUIPreparerService {
 
     public MTGCardDTO prepareCard(MTGCardDTO cardToPrepare) {
+        cardToPrepare.setName(prepareCardName(cardToPrepare.getName()));
         cardToPrepare.setCmc(cardToPrepare.getCmc().substring(0,1));
 
         if (!cardToPrepare.getColorIdentity().isEmpty()) {
@@ -35,6 +36,15 @@ public class CardUIPreparerService {
 
     public boolean isDoubleCard(MTGCardDTO card) {
         return Objects.nonNull(card.getCardFaces());
+    }
+
+    private String prepareCardName(String name) {
+        if(name.contains("//")) {
+            var splitted = name.split("//");
+            return splitted[0] + "//<br>" + splitted[1];
+        } else {
+            return name;
+        }
     }
 
     private MTGCardDTO prepareOneFaceCard(MTGCardDTO cardToPrepare) {

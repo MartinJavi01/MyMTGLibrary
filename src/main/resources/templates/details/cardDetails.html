@@ -14,7 +14,7 @@
 <body th:attr="onload=|init(${currentFace})|">
     <div id="pageContainer">
         <div th:insert="common/menuNav :: menuNavFragment"></div>
-        <p th:text="${currentCard.name}" id="cardNameText">Card name</p>
+        <p th:utext="${currentCard.name}" id="cardNameText">Card name</p>
         <div class="horizontalContainer">
             <div class="verticalDiv" id="imageDiv" th:data-current-card="${dbCard}">
                 <img th:if="${currentFace >= 0}" th:src="${currentCard.cardFaces.get(currentFace).imageUris.normal}" id="cardImageFull">
