@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-  <meta charset="UTF-8">
-  <title>Home</title>
-  <link th:href="@{/styles/home/home.css}" rel="stylesheet"/>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link th:href="@{/styles/home/home.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/common/menuNav.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/common/footer.css}" rel="stylesheet"/>
 
-<body>
-  <h1>Welcome to MyMTGLibrary</h1>
-  <button>List all cards</button>
-  <input placeholder="Search a card">
-  <button>Search</button>
-</body>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+  </head>
 
-<footer>
-  <div th:insert="common/footer :: footerFragment"></div>
-</footer>
+  <body>
+    <div id="pageContainer">
+      <div th:insert="common/menuNav :: menuNavFragment"></div>
+      <p id="welcomeText">Welcome to MyMTGLibrary</p>
+    </div>
+    
+    <footer id="footer">
+      <div th:insert="common/footer :: footerFragment"></div>
+    </footer>
+  </body>
 
 </html>

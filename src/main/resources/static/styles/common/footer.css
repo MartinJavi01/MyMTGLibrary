@@ -1,3 +1,11 @@
+#footer {
+    left: 0;
+    height: 10vh;
+    width: auto;
+    fill: rgb(211, 211, 211);
+    background-color: rgb(211, 211, 211);
+}
+
 #authorText {
     font-size: 3vh;
 }

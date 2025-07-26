@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-  <link th:href="@{/styles/common/footer.css}" rel="stylesheet"/>
-</head>
+<head></head>
 
-<body>
-</body>
+<body></body>
 
 <footer>
     <div th:fragment="footerFragment">
+      <div class="footer">
         <h3 class="footerText" id="authorText">By Javier Martín Escobar</h3>
         <p class="footerText" id="versionText" th:utext="${version}">Version text</p>
+      </div>
     </div>
 </footer>
 
