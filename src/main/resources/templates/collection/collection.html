@@ -15,9 +15,8 @@
         <div id="pageContainer">
             <div th:insert="common/menuNav :: menuNavFragment"></div>
             <p id="collectionTitleText">My collection</p>
-            <tr th:if="${cards.isEmpty()}">
-                <td id="noCardsText">No cards saved, nothing to show!</td>
-            </tr>
+            <p th:if="${cards.isEmpty() && !filtering}" class="noCardsText">No cards saved, nothing to show!</p>
+            <p th:if="${cards.isEmpty() && filtering}" class="noCardsText">No cards match the filter!</p>
             <tr th:each="card: ${cards}">
                 <div class="cardDiv">
                     <a th:href="|http://localhost:8010/details/id/${card.id}|">

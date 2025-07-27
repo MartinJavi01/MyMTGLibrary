@@ -15,8 +15,9 @@ body {
     margin-bottom: 5vh;
 }
 
-#noCardsText {
-    font-size: 5vh;
+.noCardsText {
+    font-size: 10vh;
+    align-self: center;
     text-align: center;
     padding: 5%;
 }
