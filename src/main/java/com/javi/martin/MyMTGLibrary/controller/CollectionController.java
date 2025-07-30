@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Objects;
 
-import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.CURRENT_VERSION;
+import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.*;
 
 @Controller
 @RequestMapping("/collection")
@@ -36,6 +36,8 @@ public class CollectionController {
             cards = filterService.filterCardsByCardSubType(cards, subTypeFilter);
         }
         model.addAttribute("cards", cards);
+        model.addAttribute("typeFilters", TYPE_FILTERS);
+        model.addAttribute("colors", COLOR_FILTERS);
 
         if(Objects.nonNull(typeFilter) || Objects.nonNull(subTypeFilter)) {
             model.addAttribute("filtering", true);

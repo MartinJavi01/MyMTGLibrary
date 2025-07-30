@@ -19,4 +19,7 @@ public class MyMTGLibraryConstants {
     public static final String[] TYPE_FILTERS = new String[]{
             "Creature", "Land", "Artifact", "Sorcery", "Instant",
             "Enchantment", "Legendary", "Planeswalker", "Vehicle"};
+    public static final String[] COLOR_FILTERS = new String[]{
+            "W","U","G","B","R"
+    };
 }
