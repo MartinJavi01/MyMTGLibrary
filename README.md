@@ -21,17 +21,19 @@ Developing version -> 0.3
 ### Version 0.3
 - Add always shown quick search bar.
 - Add filters to collection view
-- Migrate frontend to Angular.
 
 ### Version 0.4
+- Migrate frontend to Angular.
+
+### Version 0.5
 - Add collection import and export options
 - Enchance detail view (research if possible to edit set of shown card, zoom in image card)
 
-### Version 0.5
+### Version 0.6
 - UI overhaul, total UI enchancement
 
-### Version 0.6
+### Version 0.7
 - Add deck construction and physical storage objects
 
-### Version 0.7
+### Version 0.8
 - Final fixes for 1.0 release
