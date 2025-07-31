@@ -8,8 +8,10 @@ function closeNav() {
 
 document.getElementById("cardSearchInput").addEventListener('keyup', (event) => {
   if(event.key == 'Enter') {
+    var searchInput = document.getElementById("cardSearchInput").value;
+    searchInput = searchInput.replaceAll(" ", "+");
     console.log("Performing name search");
-    performCardSearch(document.getElementById("cardSearchInput").value);
+    performCardSearch(searchInput);
   }
 });
 

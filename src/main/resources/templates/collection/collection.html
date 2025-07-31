@@ -15,10 +15,47 @@
         <div id="pageContainer">
             <div th:insert="common/menuNav :: menuNavFragment"></div>
             <p id="collectionTitleText">My collection</p>
-            <tr th:if="${cards.isEmpty()}">
-                <td id="noCardsText">No cards saved, nothing to show!</td>
-            </tr>
-            <tr th:each="card: ${cards}">
+            <div id="showFiltersDiv">
+                <p id="showFiltersText">Show filters:</p>
+                <button id="openCloseFiltersButton" onclick="manageFilters()">+</button>
+            </div>
+
+            <div id="filtersDiv">
+                <hr class="filterSeparator">
+                <label id="typeFiltersTitle" class="filterIndicatorText">Filter by card type:</label>
+                <div id="typeFilterDiv">
+                    <tr th:each="filter: ${typeFilters}">
+                        <input type="checkbox" th:id="|typeFilterButton${filter}|" th:attr="onclick=|toogleTypeFilterButton('${filter}')|">
+                        <label th:text="${filter}" th:for="|typeFilterButton${filter}|"></label>
+                    </tr>
+                </div>
+                <hr class="filterSeparator">
+                <div id="subTypeFilterDiv">
+                    <label class="filterIndicatorText">Filter by card subtype:</label>
+                    <input id="subTypeFilterInput">
+                </div>
+                <hr class="filterSeparator">
+                <div id="colorFilterDiv">
+                    <label class="filterIndicatorText">Filter by color identity:</label>
+                    <tr th:each="color: ${colors}">
+                        <div class="colorDiv">
+                            <input type="checkbox" class="colorCheckbox" th:id="|checkbox${color}|" th:attr="onclick=|toogleColorFilterButton('${color}')|">
+                            <img th:src="|https://svgs.scryfall.io/card-symbols/${color}.svg|" class="colorImage" th:for="|checkbox${color}|">
+                        </div>
+                    </tr>
+                </div>
+                <hr class="filterSeparator">
+                <div id="descriptionFilterDiv">
+                    <label class="filterIndicatorText">Filter by description</label>
+                    <input id="descriptionFilterInput">
+                </div>
+                <button id="applyFiltersButton" onclick="applyFilters()">Apply filters</button>
+                <hr class="filterSeparator">
+            </div>
+
+            <p th:if="${cards.isEmpty() && !filtering}" class="noCardsText">No cards saved, nothing to show!</p>
+            <p th:if="${cards.isEmpty() && filtering}" class="noCardsText">No cards match the filter!</p>
+            <tr th:each="card: ${cards}" id="cardsContainer">
                 <div class="cardDiv">
                     <a th:href="|http://localhost:8010/details/id/${card.id}|">
                         <img th:if="${card.cardFaces == null}" th:src="${card.imageUris.normal}" class="cardImage">
