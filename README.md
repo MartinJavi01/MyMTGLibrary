@@ -34,6 +34,4 @@ Developing version -> 0.3
 
 ### Version 0.7
 - Add deck construction and physical storage objects
-
-### Version 0.8
 - Final fixes for 1.0 release
