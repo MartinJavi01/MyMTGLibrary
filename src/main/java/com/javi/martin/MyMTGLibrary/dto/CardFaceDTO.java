@@ -23,11 +23,11 @@ public class CardFaceDTO {
     @JsonProperty("colors")
     private List<String> colors;
     @JsonProperty("defense")
-    private int defense;
+    private String defense;
     @JsonProperty("power")
-    private int power;
+    private String power;
     @JsonProperty("toughness")
-    private int toughness;
+    private String toughness;
     @JsonProperty("image_uris")
     private ImageUrisDTO imageUris;
 
