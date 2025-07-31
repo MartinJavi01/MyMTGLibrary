@@ -20,11 +20,12 @@ Developing version -> 0.3
 
 ### Version 0.3
 - Add always shown quick search bar.
-- Enchance detail view (research if possible to edit set of shown card, zoom in image card)
+- Add filters to collection view
+- Migrate frontend to Angular.
 
 ### Version 0.4
-- Add filters to collection view
 - Add collection import and export options
+- Enchance detail view (research if possible to edit set of shown card, zoom in image card)
 
 ### Version 0.5
 - UI overhaul, total UI enchancement
