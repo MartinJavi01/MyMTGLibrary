@@ -1,0 +1,54 @@
+#welcomeText {
+    color: white;
+    font-size: 8vh;
+    text-align: center;
+}
+
+.imageCarousel {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.imageCarousel img {
+    position: absolute;
+    left: -30%;
+    animation: linear infinite;
+    animation-name: slide;
+    animation-duration: 14s;
+    height: 30vh;
+    width: auto;
+}
+
+#img2 {
+    animation-delay: 2s;
+}
+
+#img3 {
+    animation-delay: 4s;
+}
+
+#img4 {
+    animation-delay: 6s;
+}
+
+#img5 {
+    animation-delay: 8s;
+}
+
+#img6 {
+    animation-delay: 10s;
+}
+
+#img7 {
+    animation-delay: 12s;
+}
+
+@keyframes slide {
+    0% {
+        left: -30%;
+    }
+    100% {
+        left: 130vw;
+    }
+}
