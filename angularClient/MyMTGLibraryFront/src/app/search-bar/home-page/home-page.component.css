@@ -15,33 +15,33 @@
     left: -30%;
     animation: linear infinite;
     animation-name: slide;
-    animation-duration: 14s;
+    animation-duration: 24s;
     height: 30vh;
     width: auto;
 }
 
 #img2 {
-    animation-delay: 2s;
-}
-
-#img3 {
     animation-delay: 4s;
 }
 
-#img4 {
-    animation-delay: 6s;
-}
-
-#img5 {
+#img3 {
     animation-delay: 8s;
 }
 
+#img4 {
+    animation-delay: 12s;
+}
+
+#img5 {
+    animation-delay: 16s;
+}
+
 #img6 {
-    animation-delay: 10s;
+    animation-delay: 18s;
 }
 
 #img7 {
-    animation-delay: 12s;
+    animation-delay: 20s;
 }
 
 @keyframes slide {
