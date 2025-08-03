@@ -13,5 +13,6 @@ export const routes: Routes = [
             { path: 'details', component: CardDetailsPageComponent},
             { path: 'collection', component: CollectionPageComponent}
         ]
-    }
+    },
+    {path: '', redirectTo: 'mtglib', pathMatch: 'full'}
 ];

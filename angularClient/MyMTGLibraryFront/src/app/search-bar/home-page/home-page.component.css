@@ -5,9 +5,9 @@
 }
 
 .imageCarousel {
-  position: relative;
-  overflow: hidden;
-  height: 100vh;
+    position: relative;
+    overflow: hidden;
+    height: 35vh;
 }
 
 .imageCarousel img {
@@ -15,8 +15,8 @@
     left: -30%;
     animation: linear infinite;
     animation-name: slide;
-    animation-duration: 24s;
-    height: 30vh;
+    animation-duration: 20s;
+    height: 35vh;
     width: auto;
 }
 
@@ -36,12 +36,37 @@
     animation-delay: 16s;
 }
 
-#img6 {
-    animation-delay: 18s;
+.importExportDiv {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
-#img7 {
-    animation-delay: 20s;
+.importDiv {
+    overflow: hidden;
+    background-color: #3a3a3a;
+    border: #4d4d4d solid;
+    border-radius: 10px;
+    width: 30vw;
+    padding: 1vh 1vw;
+    text-align: center;
+    color: white;
+    font-size: 4vh;
+    margin-right: 40vw;
+}
+
+.exportDiv {
+    overflow: hidden;
+    background-color: #3a3a3a;
+    border: #4d4d4d solid;
+    border-radius: 10px;
+    width: 30vw;
+    padding: 1vh 1vw;
+    text-align: center;
+    color: white;
+    font-size: 4vh;
 }
 
 @keyframes slide {
