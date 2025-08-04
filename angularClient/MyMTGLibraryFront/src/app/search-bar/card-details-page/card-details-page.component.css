@@ -1,0 +1,81 @@
+.cardNameText {
+    text-align: center;
+    font-size: 6vh;
+    color: white;
+    margin-top: 5vh;
+    margin-bottom: 2vh;
+}
+
+.mainContentDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Image div*/
+
+.imageDiv {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5vw;
+}
+
+.cardImage {
+    height: 50vh;
+    width: auto;
+    margin-bottom: 2vh;
+}
+
+.cardCopiesText {
+    text-align: center;
+    font-size: 5vh;
+    color: white;
+    margin-bottom: 2vh;
+}
+
+.updateCardButton {
+    height: 5vh;
+    width: auto;
+    align-self: center;
+    color: white;
+    font-size: 3vh;
+    background-color: #3a3a3a;
+    border: #4d4d4d solid;
+    border-radius: 10px;
+    padding: 0 0.5vw;
+    cursor: pointer;
+}
+
+/* Details div */
+
+.detailsDiv {
+    min-width: 45vw;
+    background-color: #ccc7bd;
+    border: #4d4d4d solid;
+    border-radius: 10px;
+    margin-left: 7vw;
+    padding: 0 1vw;
+}
+
+.detailDiv {
+    margin-bottom: 1vh;
+}
+
+.detailInfoText {
+    color: black;
+    font-size: 3vh;
+}
+
+.detailInfoText::before {
+    content: "• ";
+    color: black;
+}
+
+.detailText {
+    color: black;
+    font-size: 3vh;
+    margin-left: 1vw;
+}
+
+.cardmarketLink {
+    color: blue;
+}

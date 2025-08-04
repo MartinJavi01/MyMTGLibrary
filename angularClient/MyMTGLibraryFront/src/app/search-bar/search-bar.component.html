@@ -8,11 +8,11 @@
     <span class="versionIndicator">Current version: 0.3.0</span>
 
     <div class="menu-tabs">
-        <span class="tab">Collection</span>
+        <span class="tab" (click)="redirectAndChangeOptionText()" [innerHTML]="[[optionText]]"></span>
         <span class="divider">||</span>
-        <span class="tab">Decks</span>
+        <span class="tab" (click)="redirect('decks')">Decks</span>
         <span class="divider">||</span>
-        <span class="tab">Storage
+        <span class="tab" (click)="redirect('storage')">Storage
             <span class="help-icon">?</span>
         </span>
     </div>
