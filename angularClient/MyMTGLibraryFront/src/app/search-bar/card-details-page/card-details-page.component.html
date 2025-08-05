@@ -3,8 +3,26 @@
     <div class="mainContentDiv">
         <div class="imageDiv">
             <img class="cardImage" src="mtg-back.jpg">
-            <span class="cardCopiesText">Card not saved</span>
-            <span class="updateCardButton">SaveCard</span>
+
+            @if (true) {
+                <span class="cardCopiesText">Card not saved</span>
+                <span class="updateCardButton">SaveCard</span>
+            } @else {
+                <div class="cardSavedDiv">
+                    <div class="outerCopiesDiv">
+                        <span class="cardCopiesText">Copies: </span>
+                        <div class="cardCopiesDiv">
+                            <span class="sumSubCopiesSymbol">-</span>
+                            <span class="copiesNumber">99</span>
+                            <span class="sumSubCopiesSymbol">+</span>
+                        </div>
+                    </div>
+                    <div class="upadteDeleteDiv">
+                        <span class="updateDeleteButton upadteButton">Update</span>
+                        <span class="updateDeleteButton">Delete</span>
+                    </div>
+                </div>
+            }
         </div>
 
         <div class="detailsDiv">

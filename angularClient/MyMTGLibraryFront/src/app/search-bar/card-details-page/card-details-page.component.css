@@ -21,10 +21,11 @@
 
 .cardImage {
     height: 50vh;
-    width: auto;
+    width: 30vw;
     margin-bottom: 2vh;
 }
 
+/* Card not saved */
 .cardCopiesText {
     text-align: center;
     font-size: 5vh;
@@ -43,6 +44,51 @@
     border-radius: 10px;
     padding: 0 0.5vw;
     cursor: pointer;
+}
+
+/* Card saved */
+
+.cardSavedDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.outerCopiesDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+.cardCopiesDiv {
+    height: 6vh;
+    display: flex;
+    flex-direction: row;
+    background-color: #ccc7bd;
+    border: #4d4d4d solid;
+    border-radius: 10px;
+    margin-left: 1vw;
+    padding: 0 1vw 1vh;
+}
+
+.sumSubCopiesSymbol {
+    font-size: 5vh;
+    font-weight: bold;
+}
+
+.copiesNumber {
+    font-size: 5vh;
+    margin: 0 1vw;
+}
+
+.updateDeleteButton {
+    font-size: 5vh;
+    background-color: #ccc7bd;
+    border: #4d4d4d solid;
+    border-radius: 10px;
+    padding: 0 0.5vw;
+}
+
+.upadteButton {
+    margin-right: 2vw;
 }
 
 /* Details div */
