@@ -1,30 +1,35 @@
-#topbar {
-    background-color: #3a3a3a;
-    border-bottom: #4d4d4d solid;
-    width: 100%;
-    height: 10vh;
+.topbar {
     display: flex;
     flex-direction: column;
-    align-items: center;
     position: relative;
+    align-items: center;
     z-index: 2;
 }
 
-#cardSearchContainer {
+.cardSearchDiv {
+    width: 100%;
+    background-color: #3a3a3a;
+    border-bottom: #4d4d4d solid;
     height: 10vh;
+}
+
+.cardSearchContainer {
     display: flex;
-    align-content: center;
+    flex-direction: row;
+    width: 100%;
+    height: 10vh;
+    justify-content: center;
     margin-top: 2vh;
 }
 
-#cardSearchText {
+.cardSearchText {
     font-size: 4vh;
     color: white;
     margin-right: 1vw;
     font-weight: bold;
 }
 
-#searchInput {
+.searchInput {
     background-color: #4d4d4d;
     border: none;
     border-color: #4d4d4d;
@@ -35,10 +40,11 @@
     font-size: 3vh;
 }
 
-#searchInput::placeholder {
+.searchInput::placeholder {
     font-size: 3vh;
-    text-align: center;
+    text-align: start;
     color: white;
+    padding-left: 1vw;
 }
 
 .versionIndicator {
@@ -65,7 +71,7 @@
     border-radius: 10px;
     display: flex;
     align-items: center;
-    margin-top: 1vh;
+    margin-top: -2vh;
 }
 
 .tab {

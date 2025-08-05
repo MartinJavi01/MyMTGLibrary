@@ -2,11 +2,11 @@
     color: white;
     font-size: 8vh;
     text-align: center;
+    margin-top: 0;
 }
 
 .imageCarousel {
     position: relative;
-    overflow: hidden;
     height: 35vh;
 }
 
@@ -36,9 +36,18 @@
     animation-delay: 16s;
 }
 
+@keyframes slide {
+    0% {
+        left: -30%;
+    }
+    100% {
+        left: 130vw;
+    }
+}
+
 .importExportDiv {
     position: absolute;
-    bottom: 0;
+    bottom: 4vh;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -67,13 +76,4 @@
     text-align: center;
     color: white;
     font-size: 4vh;
-}
-
-@keyframes slide {
-    0% {
-        left: -30%;
-    }
-    100% {
-        left: 130vw;
-    }
 }

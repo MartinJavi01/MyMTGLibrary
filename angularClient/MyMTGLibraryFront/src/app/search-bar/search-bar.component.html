@@ -1,11 +1,13 @@
-<header id="topbar">
-    <span id="cardSearchContainer">
-            <em id="cardSearchText">Search card: </em>
-            <input id="searchInput" placeholder="Card name or id">
-    </span>
+<header class="topbar">
+    <div class="cardSearchDiv">
+        <div class="cardSearchContainer">
+            <em class="cardSearchText">Search card: </em>
+            <input class="searchInput" placeholder="Card name or id">
+        </div>
 
-    <span class="authorIndicator">By Javier Martín</span>
-    <span class="versionIndicator">Current version: 0.3.0</span>
+        <span class="authorIndicator">By Javier Martín</span>
+        <span class="versionIndicator">Current version: 0.3.0</span>
+    </div>
 
     <div class="menu-tabs">
         <span class="tab" (click)="redirectAndChangeOptionText()" [innerHTML]="[[optionText]]"></span>

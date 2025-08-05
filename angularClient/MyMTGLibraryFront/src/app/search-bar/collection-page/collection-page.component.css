@@ -1,0 +1,59 @@
+.collectionTitle {
+    color: white;
+    font-size: 6vh;
+    text-align: center;
+}
+
+.filtersDiv {
+    display: flex;
+    flex-direction: column;
+    background-color: #3a3a3a;
+    border-top: #4d4d4d solid;
+    border-bottom: #4d4d4d solid;
+}
+
+.topTitleFiltersDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+.filtersTitleText {
+    color: white;
+    font-size: 4vh;
+    text-align: start;
+    margin-left: 1vw;
+}
+
+.openCloseFiltersButton {
+    height: 4vh;
+    width: auto;
+    margin-left: 1vw;
+    margin-top: 0.5vh;
+    margin-bottom: 0.5vh;
+    cursor: pointer;
+}
+
+.zoomDiv {
+    height: 4vh;
+    background-color: #ccc7bd;
+    border: #4d4d4d solid;
+    border-radius: 10px;
+    position: absolute;
+    right: 0;
+    margin-right: 1vw;
+    padding-left: 1vw;
+    margin-top: 0.5vh;
+}
+
+.zoomImage {
+    height: 3.5vh;
+    width: auto;
+    margin-right: 1vw;
+    cursor: pointer;
+}
+
+.zoomText {
+    font-size: 3.5vh;
+    margin-right: 0.5vw;
+}
+
