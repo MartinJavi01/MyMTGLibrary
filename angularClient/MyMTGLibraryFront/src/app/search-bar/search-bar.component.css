@@ -47,21 +47,35 @@
     padding-left: 1vw;
 }
 
-.versionIndicator {
+.homeIcon {
     position: absolute;
-    top: 0;
+    top: 1vh;
+    left: 1vw;
+    width: 6vw;
+    height: auto;
+    margin-left: 1vw;
+}
+
+.homeIcon:hover {
+    filter: brightness(0.7);
+}
+
+.authorVersionDiv {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 1vh;
     right: 0;
     margin-right: 1vw;
-    font-size: 2vh;
+}
+
+.authorIndicator {   
+    font-size: 1vh;
     color: white;
 }
 
-.authorIndicator {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin-left: 1vw;
-    font-size: 2vh;
+.versionIndicator {
+    font-size: 1vh;
     color: white;
 }
 
@@ -84,6 +98,10 @@
     font-weight: bold;
 }
 
+.tab:hover {
+    filter: brightness(0.7);
+}
+
 .divider {
     color: #272727;
     font-size: 4vh;
@@ -96,6 +114,9 @@
     padding: 0 5px;
     font-size: 1vh;
     font-weight: bold;
+    margin-left: -1vw;
+    margin-right: 0.5vw;
+    margin-bottom: 3vh;
 }
 
 .main {

@@ -57,3 +57,32 @@
     margin-right: 0.5vw;
 }
 
+.filterDiv {
+    display: flex;
+    flex-direction: row;
+    margin-left: 1vw;
+    margin-bottom: 2vh;
+}
+
+.filterIndicator {
+    color: white;
+    font-size: 3vh;
+}
+
+.filterInput {
+    background-color: #4d4d4d;
+    border: none;
+    border-color: #4d4d4d;
+    border-radius: 10px;
+    width: 30vw;
+    height: 4vh;
+    color: white;
+    font-size: 3vh;
+    margin-left: 1vw;
+}
+
+.applyResetFiltersButton {
+    color: white;
+    font-size: 3vh;
+    
+}
