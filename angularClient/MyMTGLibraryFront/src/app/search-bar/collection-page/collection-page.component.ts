@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './collection-page.component.css'
 })
 export class CollectionPageComponent {
+  filtersOpened = false;
 
+  changeFiltersOpened() {
+    this.filtersOpened = !this.filtersOpened;
+  }
 }
