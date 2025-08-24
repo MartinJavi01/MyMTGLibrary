@@ -2,7 +2,7 @@
     <div class="cardSearchDiv">
         <div class="cardSearchContainer">
             <em class="cardSearchText">Search card: </em>
-            <input class="searchInput" placeholder="Card name or id">
+            <input class="searchInput" placeholder="Card name or id" [(ngModel)]="searchString" (keydown)="performCardSearch($event)">
         </div>
 
         <img class="homeIcon" src="home.png" (click)="redirect('home')">

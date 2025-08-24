@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {MTGCard} from '../../models/MTGCard';
 
 @Component({
   selector: 'app-card-details-page',
@@ -8,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class CardDetailsPageComponent {
 
+  @Input() card = {} as MTGCard;
+  cardName = "";
+
+  constructor() {
+    this.cardName = this.card.name;
+  }
 }

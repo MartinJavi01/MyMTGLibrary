@@ -11,8 +11,12 @@ export class SearchBarService {
 
     constructor(private httpClient: HttpClient) {}
 
-    performCardSearch(name: String): Observable<MTGCard> {
+    searchByName(name: String): Observable<MTGCard> {
         return this.httpClient.get("/details/name/" + name) as Observable<MTGCard>;
+    }
+
+    searchById(id: String): Observable<MTGCard> {
+      return this.httpClient.get("details/id/" + id) as Observable<MTGCard>;
     }
 
 }
