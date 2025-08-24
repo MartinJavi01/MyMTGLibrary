@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, Output} from '@angular/core';
 import { Router, RouterOutlet, RouterLink, ActivatedRoute } from '@angular/router';
+import {SearchBarService} from './search-bar.service';
+import {MTGCard} from '../models/MTGCard';
 
 @Component({
   selector: 'app-search-bar',
@@ -9,10 +11,14 @@ import { Router, RouterOutlet, RouterLink, ActivatedRoute } from '@angular/route
 })
 export class SearchBarComponent {
 
-  optionText: String;
+  @Output() currentCard = {} as MTGCard;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
-    this.optionText = 'Collection';
+  constructor(private router: Router, private route: ActivatedRoute, private service: SearchBarService) {}
+
+  performCardSearch(name: String) {
+    this.service.performCardSearch(name).subscribe( card => {
+      if
+    })
   }
 
   redirect(redirectPath: String) {
