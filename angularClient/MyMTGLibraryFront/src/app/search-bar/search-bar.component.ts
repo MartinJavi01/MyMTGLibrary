@@ -20,7 +20,7 @@ export class SearchBarComponent {
 
   performCardSearch(event: KeyboardEvent) {
     if (event.key === 'Enter') {
-      this.service.searchByName(this.searchString)
+      this.service.searchByName(this.searchString.replaceAll('+', ' '))
         .subscribe( card => {
             this.currentCard.emit(card);
             this.router.navigate(['details']);

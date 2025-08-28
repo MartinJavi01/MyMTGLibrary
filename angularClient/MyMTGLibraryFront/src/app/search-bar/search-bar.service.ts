@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import { MTGCard } from "../models/MTGCard";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
@@ -9,14 +9,16 @@ import { Observable } from "rxjs";
 
 export class SearchBarService {
 
-    constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient,  @Inject('BASE_API_URL') private baseUrl: string) {
+        this.baseUrl = baseUrl
+    }
 
     searchByName(name: String): Observable<MTGCard> {
-        return this.httpClient.get("/details/name/" + name) as Observable<MTGCard>;
+        return this.httpClient.get(this.baseUrl + "/details/name/" + name) as Observable<MTGCard>;
     }
 
     searchById(id: String): Observable<MTGCard> {
-      return this.httpClient.get("details/id/" + id) as Observable<MTGCard>;
+      return this.httpClient.get(this.baseUrl + "details/id/" + id) as Observable<MTGCard>;
     }
 
 }

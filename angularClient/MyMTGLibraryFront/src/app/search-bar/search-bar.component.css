@@ -51,8 +51,8 @@
     position: absolute;
     top: 1vh;
     left: 1vw;
-    width: 6vw;
-    height: auto;
+    width: auto;
+    height: 8vh;
     margin-left: 1vw;
 }
 
@@ -74,12 +74,12 @@
 }
 
 .authorIndicator {   
-    font-size: 1vh;
+    font-size: 2vh;
     color: white;
 }
 
 .versionIndicator {
-    font-size: 1vh;
+    font-size: 2vh;
     color: white;
 }
 
