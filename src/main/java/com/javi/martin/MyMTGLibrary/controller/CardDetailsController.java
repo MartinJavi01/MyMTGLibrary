@@ -8,16 +8,15 @@ import com.javi.martin.MyMTGLibrary.service.CardUIPreparerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
 import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.CURRENT_VERSION;
 
-@Controller
+@RestController
 @RequestMapping("/details")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CardDetailsController {
 
     @Autowired

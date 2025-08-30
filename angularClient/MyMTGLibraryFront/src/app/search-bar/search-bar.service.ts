@@ -14,11 +14,13 @@ export class SearchBarService {
     }
 
     searchByName(name: String): Observable<MTGCard> {
+        console.log(this.baseUrl + "/details/name/" + name);
         return this.httpClient.get(this.baseUrl + "/details/name/" + name) as Observable<MTGCard>;
     }
 
     searchById(id: String): Observable<MTGCard> {
-      return this.httpClient.get(this.baseUrl + "details/id/" + id) as Observable<MTGCard>;
+        console.log(this.baseUrl + "/details/id/" + id);
+      return this.httpClient.get(this.baseUrl + "/details/id/" + id) as Observable<MTGCard>;
     }
 
 }

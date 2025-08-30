@@ -20,20 +20,21 @@ export class SearchBarComponent {
 
   performCardSearch(event: KeyboardEvent) {
     if (event.key === 'Enter') {
-      this.service.searchByName(this.searchString.replaceAll('+', ' '))
+      this.service.searchByName(this.searchString.replaceAll(' ', '+'))
         .subscribe( card => {
             this.currentCard.emit(card);
-            this.router.navigate(['details']);
+            this.router.navigate(['mtglib/details']);
           },
           err => {
-            this.service.searchById(this.searchString)
+            /*this.service.searchById(this.searchString)
               .subscribe( card => {
                   this.currentCard.emit(card);
                   this.router.navigate(['details']);
                 },
                 err => {
                   console.error(err);
-                })
+                })*/
+            console.log(err);
           })
     }
   }
