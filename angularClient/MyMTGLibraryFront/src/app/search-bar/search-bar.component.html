@@ -1,11 +1,12 @@
 <header class="topbar">
     <div class="cardSearchDiv">
+        <img class="homeIcon" src="home.png" (click)="redirect('home')">
+
         <div class="cardSearchContainer">
             <em class="cardSearchText">Search card: </em>
-            <input class="searchInput" placeholder="Card name or id" [(ngModel)]="searchString" (keydown)="performCardSearch($event)">
+            <input class="searchInput" placeholder="Card name or id" [(ngModel)]="searchString" (keydown)="manageKeyboardEvent($event)">
+            <img class="searchIcon" src="search.png" (click)="performCardSearch()">
         </div>
-
-        <img class="homeIcon" src="home.png" (click)="redirect('home')">
 
         <div class="authorVersionDiv">
             <span class="authorIndicator">By Javier Martín</span>

@@ -7,8 +7,4 @@ import {Observable} from 'rxjs';
 
 export class CardDetailsPageComponentService {
     constructor(private http: HttpClient) {}
-
-    getCardByName(name: string): Observable<any> {
-        return this.http.get("/details/name/" + name);
-    }
 }

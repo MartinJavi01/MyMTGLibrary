@@ -2,26 +2,27 @@
     text-align: center;
     font-size: 6vh;
     color: white;
-    margin-top: 5vh;
+    margin-top: 2vh;
     margin-bottom: 2vh;
 }
 
 .mainContentDiv {
     display: flex;
     flex-direction: row;
+    position: fixed;
+    overflow: auto;
 }
 
 /* Image div*/
-
 .imageDiv {
     display: flex;
     flex-direction: column;
     margin-left: 5vw;
 }
 
-.cardImage {
+#cardImage {
     height: 50vh;
-    width: 30vw;
+    width: 26vw;
     margin-bottom: 2vh;
 }
 
@@ -94,8 +95,12 @@
 /* Details div */
 
 .detailsDiv {
-    min-width: 45vw;
-    background-color: #ccc7bd;
+    display: block;
+    width: 55vw;
+    max-height: 70vh;
+    overflow-y: scroll;
+    top: 0;
+    background-color: #494949;
     border: #4d4d4d solid;
     border-radius: 10px;
     margin-left: 7vw;
@@ -103,25 +108,29 @@
 }
 
 .detailDiv {
+    overflow: visible;
     margin-bottom: 1vh;
 }
 
+.symbolImage{
+    height: 3vh;
+    width: auto;
+}
+
 .detailInfoText {
-    color: black;
+    color: white;
     font-size: 3vh;
+
 }
 
 .detailInfoText::before {
     content: "• ";
-    color: black;
+    color: white;
 }
 
 .detailText {
-    color: black;
+    color: white;
     font-size: 3vh;
     margin-left: 1vw;
-}
-
-.cardmarketLink {
-    color: blue;
+    text-align: start;
 }

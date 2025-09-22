@@ -1,11 +1,10 @@
 <body>
-    <p class="cardNameText">Card name</p>
-    <p class="cardNameText">{{cardName}}</p>
+    <p class="cardNameText">{{currentCard.name}}</p>
     <div class="mainContentDiv">
         <div class="imageDiv">
-            <img class="cardImage" src="mtg-back.jpg">
+            <img id="cardImage" src="mtg-back.jpg">
 
-            @if (true) {
+            @if(currentCard.copies <= 0) {
                 <span class="cardCopiesText">Card not saved</span>
                 <span class="updateCardButton">SaveCard</span>
             } @else {
@@ -28,55 +27,89 @@
 
         <div class="detailsDiv">
             <div class="detailDiv">
-                <span class="detailInfoText">Creature type:</span>
-                <span class="detailText">type</span>
+                <span class="detailInfoText">Card type:</span>
+                <span class="detailText">{{currentCard.primaryType}}</span>
             </div>
-            <div class="detailDiv">
-                <span class="detailInfoText">Card subtype:</span>
-                <span class="detailText">subtype</span>
-            </div>
-            <div class="detailDiv">
+            
+            @if (currentCard.subType != null) {
+                <div class="detailDiv">
+                    <span class="detailInfoText">Card subtype:</span>
+                    <span class="detailText">{{currentCard.subType}}</span>
+                </div>
+            }
+
+            <div id="manaCostDiv" class="detailDiv">
                 <span class="detailInfoText">Mana cost:</span>
-                <span class="detailText">cost</span>
+                @for (symbol of manaCosts; track $index) {
+                    <img class="symbolImage" src={{symbol}}>
+                }
             </div>
             <div class="detailDiv">
                 <span class="detailInfoText">Color identity:</span>
-                <span class="detailText">identity</span>
+                @if (colorIdentity.length > 1) {
+                    @for (symbol of colorIdentity; track $index) {
+                        <img class="symbolImage" src={{symbol}}>
+                    }
+                } @else {
+                    <span class="detailText">{{currentCard.color_identity}}</span>
+                }
             </div>
             <div class="detailDiv">
                 <span class="detailInfoText">Cmc:</span>
-                <span class="detailText">cmc</span>
+                <span class="detailText">{{currentCard.cmc}}</span>
             </div>
             <div class="detailDiv">
                 <span class="detailInfoText">Rarity:</span>
-                <span class="detailText">rarity</span>
+                <span class="detailText">{{currentCard.rarity}}</span>
             </div>
             <div class="detailDiv">
                 <span class="detailInfoText">Set:</span>
-                <span class="detailText">set</span>
+                <span class="detailText">{{currentCard.setDTO.name}}</span>
             </div>
+            
+            @if (currentCard.power != null) {
+                <div class="detailDiv">
+                    <span class="detailInfoText">Power:</span>
+                    <span class="detailText">{{currentCard.power}}</span>
+                </div>
+            }
+            
+            @if (currentCard.toughness != null) {
+                <div class="detailDiv">
+                    <span class="detailInfoText">Toughness:</span>
+                    <span class="detailText">{{currentCard.toughness}}</span>
+                </div>
+            }
+
             <div class="detailDiv">
-                <span class="detailInfoText">Power:</span>
-                <span class="detailText">power</span>
-            </div>
-            <div class="detailDiv">
-                <span class="detailInfoText">Toughness:</span>
-                <span class="detailText">toughness</span>
-            </div>
-            <div class="detailDiv">
-                <span class="detailInfoText">Description</span>
-                <span class="detailText">description</span>
+                <span class="detailInfoText">Description:</span>
+                <br>
+                @if (currentCard.oracle_text.includes("!")) {
+                    @for (textLine of currentCard.oracle_text.split("!"); track $index) {
+                        @if (textLine.includes("https")) {
+                            <img class="symbolImage" src={{textLine}}>
+                        } @else if (textLine.includes("br>")) {
+                            <br><br>
+                        } @else {
+                            @if (textLine.length > 0) {
+                                <span class="detailText">{{textLine}}</span>
+                            }
+                        }
+                    }
+                } @else {
+                   <span class="detailText">{{currentCard.oracle_text}}</span> 
+                }
             </div>
             <div class="detailDiv">
                 <span class="detailInfoText">Eur price:</span>
-                <span class="detailText">price</span>
+                <span class="detailText">{{currentCard.prices.eur}}</span>
             </div>
             <div class="detailDiv">
                 <span class="detailInfoText">Usd price:</span>
-                <span class="detailText">price</span>
+                <span class="detailText">{{currentCard.prices.usd}}</span>
             </div>
             <div class="detailDiv">
-                <span class="detailInfoText cardmarketLink">Cardmarket</span>
+                <a href="{{currentCard.purchase_uris.cardmarket}}" class="detailInfoText">Cardmarket</a>
             </div>
         </div>
     </div>

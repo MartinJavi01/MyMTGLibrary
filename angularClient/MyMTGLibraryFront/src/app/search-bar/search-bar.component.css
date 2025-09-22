@@ -34,7 +34,7 @@
     border: none;
     border-color: #4d4d4d;
     border-radius: 10px;
-    width: 30vw;
+    width: 25vw;
     height: 5vh;
     color: white;
     font-size: 3vh;
@@ -47,12 +47,27 @@
     padding-left: 1vw;
 }
 
+.searchIcon {
+    width: auto;
+    height: 6vh;
+    top: 2vh;
+    margin-left: 1vw;
+}
+
+.searchIcon:hover {
+    filter: brightness(0.7);
+}
+
+.searchIcon:active {
+    filter: brightness(0.5);
+}
+
 .homeIcon {
     position: absolute;
-    top: 1vh;
+    top: 2.5vh;
     left: 1vw;
     width: auto;
-    height: 8vh;
+    height: 5vh;
     margin-left: 1vw;
 }
 
@@ -74,12 +89,12 @@
 }
 
 .authorIndicator {   
-    font-size: 2vh;
+    font-size: 1.5vh;
     color: white;
 }
 
 .versionIndicator {
-    font-size: 2vh;
+    font-size: 1.5vh;
     color: white;
 }
 

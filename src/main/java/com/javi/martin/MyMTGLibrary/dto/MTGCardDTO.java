@@ -63,9 +63,11 @@ public class MTGCardDTO {
     private MTGSetDTO setDTO;
     private int copies;
     private boolean foil;
+    private String primaryType;
+    private String subType;
 
     public MTGCardDTO() {
-        copies = 1;
+        copies = 0;
         foil = false;
     }
 }

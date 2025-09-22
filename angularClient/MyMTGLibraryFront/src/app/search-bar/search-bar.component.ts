@@ -14,29 +14,36 @@ export class SearchBarComponent {
 
   searchString = "";
 
-  @Output() currentCard = new EventEmitter<MTGCard>();
-
   constructor(private router: Router, private route: ActivatedRoute, private service: SearchBarService) {}
 
-  performCardSearch(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
-      this.service.searchByName(this.searchString.replaceAll(' ', '+'))
+  manageKeyboardEvent(event: KeyboardEvent) {
+    if (event.key == 'Enter') {
+      this.performCardSearch();
+    }
+  }
+
+  performCardSearch() {
+    if(this.searchString.replaceAll(" ", "").length == 0) {
+      alert("Can't perform empty search!");
+      return;
+    }
+
+    this.service.searchByName(this.searchString.replaceAll(' ', '+'))
         .subscribe( card => {
-            this.currentCard.emit(card);
-            this.router.navigate(['mtglib/details']);
+            this.searchString = "";
+            this.router.navigate(['mtglib/details'], {queryParams: {name: card.name}});
           },
           err => {
-            /*this.service.searchById(this.searchString)
+            this.service.searchById(this.searchString)
               .subscribe( card => {
-                  this.currentCard.emit(card);
-                  this.router.navigate(['details']);
+                  this.searchString = "";
+                  this.router.navigate(['mtglib/details']);
                 },
                 err => {
                   console.error(err);
-                })*/
+                })
             console.log(err);
           })
-    }
   }
 
   redirect(redirectPath: String) {
