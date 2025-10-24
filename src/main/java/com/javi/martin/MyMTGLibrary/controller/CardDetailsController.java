@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.CURRENT_VERSION;
@@ -27,6 +28,13 @@ public class CardDetailsController {
     private CardDBSearchService cardDBSearchService;
     @Autowired
     private CardUIPreparerService preparer;
+
+    @GetMapping("/search/{searchString}")
+    public List<MTGCardDTO> getMultipleCardsBySearch(@PathVariable String searchString) throws JsonProcessingException {
+        log.info("Received GET for /search/{}", searchString);
+
+        return cardSearchService.getMultipleCardsBySearch(searchString);
+    }
 
     @GetMapping("/name/{cardName}")
     public String getCardDetailsByName(@PathVariable String cardName) throws JsonProcessingException {
