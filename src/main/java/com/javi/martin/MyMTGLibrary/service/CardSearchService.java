@@ -1,6 +1,7 @@
 package com.javi.martin.MyMTGLibrary.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javi.martin.MyMTGLibrary.dto.MTGCardDTO;
 import com.javi.martin.MyMTGLibrary.dto.MTGSetDTO;
@@ -15,6 +16,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
+import java.util.List;
 
 import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.*;
 
@@ -29,6 +31,27 @@ public class CardSearchService {
 
     public CardSearchService() {
         objectMapper = new ObjectMapper();
+    }
+
+    public List<MTGCardDTO> getMultipleCardsBySearch(String searchString) {
+        var requestParams = new HashMap<String, String>();
+        requestParams.put("q", searchString);
+
+        var client = HttpClient.newHttpClient();
+        List<MTGCardDTO> returnList;
+
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(SCRYFALL_BASE_PATH + SEARCH_PATH + ParametersStringBuilder.getParamsString(requestParams))).build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            returnList = objectMapper.readValue(response.body(), new TypeReference<List<MTGCardDTO>>() {});
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        returnList.forEach(card -> card.setSetDTO(getSetForCard(card)));
+
+        return returnList;
     }
 
     public MTGCardDTO searchCardByName(String cardName) {

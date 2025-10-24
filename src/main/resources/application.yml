@@ -6,8 +6,6 @@ spring:
       host: localhost
       port: 27017
       database: MyMTGLibrary
-  resources:
-    add-mappings: true
 
 mongo:
   mongoUri: mongodb://localhost:27017/

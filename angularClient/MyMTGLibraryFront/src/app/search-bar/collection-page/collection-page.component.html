@@ -1,0 +1,36 @@
+<body>
+    <p class="collectionTitle">Collection</p>
+
+    <div class="filtersDiv">
+        <div class="topTitleFiltersDiv">
+            <span class="filtersTitleText">Filters</span>
+            <img class="openCloseFiltersButton" src="filter.png" (click)="changeFiltersOpened()">
+            <div class="zoomDiv">
+                <img class="zoomImage" src="zoom-out.png">
+                <span class="zoomText">50%</span>
+                <img class="zoomImage" src="zoom-in.png">
+            </div>
+        </div>
+
+        @if (filtersOpened) {
+            <div class="filterDiv">
+                <span class="filterIndicator">Creature type:</span>
+            </div>
+            <div class="filterDiv">
+                <span class="filterIndicator">Card subtype:</span>
+                <input class="filterInput" placeholder="Card subtype">
+            </div>
+            <div class="filterDiv">
+                <span class="filterIndicator">Color identity:</span>
+            </div>
+            <div class="filterDiv">
+                <span class="filterIndicator">Card description:</span>
+                <input class="filterInput" placeholder="Card description">
+            </div>
+            <div class="filterDiv">
+                <span class="applyResetFiltersButton">Apply filters</span>
+                <span class="applyResetFiltersButton">Clear filters</span>
+            </div>
+        }
+    </div>
+</body>

@@ -1,0 +1,149 @@
+.topbar {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    z-index: 2;
+}
+
+.cardSearchDiv {
+    width: 100%;
+    background-color: #3a3a3a;
+    border-bottom: #4d4d4d solid;
+    height: 10vh;
+}
+
+.cardSearchContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 10vh;
+    justify-content: center;
+    margin-top: 2vh;
+}
+
+.cardSearchText {
+    font-size: 4vh;
+    color: white;
+    margin-right: 1vw;
+    font-weight: bold;
+}
+
+.searchInput {
+    background-color: #4d4d4d;
+    border: none;
+    border-color: #4d4d4d;
+    border-radius: 10px;
+    width: 25vw;
+    height: 5vh;
+    color: white;
+    font-size: 3vh;
+}
+
+.searchInput::placeholder {
+    font-size: 3vh;
+    text-align: start;
+    color: white;
+    padding-left: 1vw;
+}
+
+.searchIcon {
+    width: auto;
+    height: 6vh;
+    top: 2vh;
+    margin-left: 1vw;
+}
+
+.searchIcon:hover {
+    filter: brightness(0.7);
+}
+
+.searchIcon:active {
+    filter: brightness(0.5);
+}
+
+.homeIcon {
+    position: absolute;
+    top: 2.5vh;
+    left: 1vw;
+    width: auto;
+    height: 5vh;
+    margin-left: 1vw;
+}
+
+.homeIcon:hover {
+    filter: brightness(0.7);
+}
+
+.homeIcon:active {
+    filter: brightness(0.5);
+}
+
+.authorVersionDiv {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 1vh;
+    right: 0;
+    margin-right: 1vw;
+}
+
+.authorIndicator {   
+    font-size: 1.5vh;
+    color: white;
+}
+
+.versionIndicator {
+    font-size: 1.5vh;
+    color: white;
+}
+
+.menu-tabs {
+    background-color: #3a3a3a;
+    border: #4d4d4d solid;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: -2vh;
+}
+
+.tab {
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    font-size: 3vh;
+    padding: 5px 15px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tab:hover {
+    filter: brightness(0.7);
+}
+
+.tab:active {
+    filter: brightness(0.5);
+}
+
+.divider {
+    color: #272727;
+    font-size: 4vh;
+}
+
+.help-icon {
+    background-color: white;
+    color: black;
+    border-radius: 50%;
+    padding: 0 5px;
+    font-size: 1vh;
+    font-weight: bold;
+    margin-left: -1vw;
+    margin-right: 0.5vw;
+    margin-bottom: 3vh;
+}
+
+.main {
+    position: relative;
+    height: 90vh;
+    z-index: 2;
+}

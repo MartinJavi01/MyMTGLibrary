@@ -1,21 +1,25 @@
 package com.javi.martin.MyMTGLibrary.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.javi.martin.MyMTGLibrary.dto.MTGCardDTO;
 import com.javi.martin.MyMTGLibrary.service.CardDBSearchService;
 import com.javi.martin.MyMTGLibrary.service.CardSearchService;
 import com.javi.martin.MyMTGLibrary.service.CardUIPreparerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.CURRENT_VERSION;
 
-@Controller
+@RestController
 @RequestMapping("/details")
+@CrossOrigin(origins = "http://localhost:4200")
+@Slf4j
 public class CardDetailsController {
 
     @Autowired
@@ -25,75 +29,40 @@ public class CardDetailsController {
     @Autowired
     private CardUIPreparerService preparer;
 
-    @RequestMapping("/name/{cardName}")
-    public String getCardDetailsByName(Model model, @PathVariable String cardName) throws JsonProcessingException {
-        model.addAttribute("version", "Current version: " + CURRENT_VERSION);
+    @GetMapping("/search/{searchString}")
+    public List<MTGCardDTO> getMultipleCardsBySearch(@PathVariable String searchString) throws JsonProcessingException {
+        log.info("Received GET for /search/{}", searchString);
+
+        return cardSearchService.getMultipleCardsBySearch(searchString);
+    }
+
+    @GetMapping("/name/{cardName}")
+    public String getCardDetailsByName(@PathVariable String cardName) throws JsonProcessingException {
+        log.info("Received GET for /name/{}", cardName);
 
         var apiCard = cardSearchService.searchCardByName(cardName);
         var dbCard = cardDBSearchService.getCardByName(apiCard.getName());
-        model.addAttribute("cardOnDb", Objects.nonNull(dbCard));
-        apiCard = preparer.prepareCard(apiCard);
-        if (Objects.isNull(dbCard)) {
-            dbCard = cardSearchService.searchCardByName(cardName);
+        if (Objects.nonNull(dbCard)) {
+            dbCard = preparer.prepareCard(dbCard);
+            return cardSearchService.returnCardAsJson(dbCard);
         } else {
-            model.addAttribute("copies", "" + dbCard.getCopies());
+            apiCard = preparer.prepareCard(apiCard);
+            return cardSearchService.returnCardAsJson(apiCard);
         }
-
-        model.addAttribute("dbCard", cardSearchService.returnCardAsJson(dbCard));
-        model.addAttribute("currentCard", apiCard);
-
-        if (preparer.isDoubleCard(dbCard)) {
-            model.addAttribute("currentFace", 0);
-        } else {
-            model.addAttribute("currentFace", -1);
-        }
-        return "details/cardDetails";
     }
 
-    @RequestMapping("/id/{id}/{cardFace}")
-    public String getCardDetailsByIdAndSide(Model model, @PathVariable String id, @PathVariable int cardFace) throws JsonProcessingException {
-        model.addAttribute("version", "Current version: " + CURRENT_VERSION);
+    @GetMapping("/id/{id}")
+    public String getCardDetailsById(@PathVariable String id) throws JsonProcessingException {
+        log.info("Received GET for /id/{}", id);
 
         var apiCard = cardSearchService.searchCardById(id);
         var dbCard = cardDBSearchService.getCardById(id);
-        model.addAttribute("cardOnDb", Objects.nonNull(dbCard));
-        apiCard = preparer.prepareCard(apiCard);
-        if (Objects.isNull(dbCard)) {
-            dbCard = cardSearchService.searchCardById(id);
+        if (Objects.nonNull(dbCard)) {
+            dbCard = preparer.prepareCard(dbCard);
+            return cardSearchService.returnCardAsJson(dbCard);
         } else {
-            model.addAttribute("copies", "" + dbCard.getCopies());
+            apiCard = preparer.prepareCard(apiCard);
+            return cardSearchService.returnCardAsJson(apiCard);
         }
-
-        model.addAttribute("dbCard", cardSearchService.returnCardAsJson(dbCard));
-        model.addAttribute("currentCard", apiCard);
-
-        model.addAttribute("currentFace", cardFace);
-        return "details/cardDetails";
-    }
-
-    @RequestMapping("/id/{id}")
-    public String getCardDetailsById(Model model, @PathVariable String id) throws JsonProcessingException {
-        model.addAttribute("version", "Current version: " + CURRENT_VERSION);
-
-        var apiCard = cardSearchService.searchCardById(id);
-        var dbCard = cardDBSearchService.getCardById(id);
-        model.addAttribute("cardOnDb", Objects.nonNull(dbCard));
-        apiCard = preparer.prepareCard(apiCard);
-        if (Objects.isNull(dbCard)) {
-            dbCard = cardSearchService.searchCardById(id);
-        } else {
-            model.addAttribute("copies", "" + dbCard.getCopies());
-        }
-
-        model.addAttribute("dbCard", cardSearchService.returnCardAsJson(dbCard));
-        model.addAttribute("currentCard", apiCard);
-
-        if (preparer.isDoubleCard(dbCard)) {
-            model.addAttribute("currentFace", 0);
-        } else {
-            model.addAttribute("currentFace", -1);
-        }
-
-        return "details/cardDetails";
     }
 }

@@ -14,6 +14,8 @@ public class CardUIPreparerService {
 
     public MTGCardDTO prepareCard(MTGCardDTO cardToPrepare) {
         cardToPrepare.setName(prepareCardName(cardToPrepare.getName()));
+        cardToPrepare.setPrimaryType(getType(cardToPrepare.getTypeLine(), true));
+        cardToPrepare.setSubType(getType(cardToPrepare.getTypeLine(), false));
         cardToPrepare.setCmc(cardToPrepare.getCmc().substring(0,1));
 
         if (!cardToPrepare.getColorIdentity().isEmpty()) {
@@ -32,6 +34,14 @@ public class CardUIPreparerService {
 
 
         return isDoubleCard(cardToPrepare) ? prepareDoubleFacedCard(cardToPrepare) : prepareOneFaceCard(cardToPrepare);
+    }
+
+    public String getType(String typeLine, boolean primary) {
+        if (primary) {
+            return typeLine.contains(TYPE_LINE_SEPARATOR) ? typeLine.split(TYPE_LINE_SEPARATOR)[0] : typeLine;
+        } else {
+            return typeLine.contains(TYPE_LINE_SEPARATOR) ? typeLine.split(TYPE_LINE_SEPARATOR)[1] : null;
+        }
     }
 
     public boolean isDoubleCard(MTGCardDTO card) {
@@ -74,7 +84,7 @@ public class CardUIPreparerService {
                 splitedDescription[i] += ".";
             }
         }
-        return String.join("<br><br>", splitedDescription);
+        return String.join("!<br><br>!", splitedDescription);
     }
 
     private String parseSymbolsToImage(String baseDescription) {
@@ -86,7 +96,7 @@ public class CardUIPreparerService {
             if (!insideKeysText[0].isEmpty()) {
                 returnString += insideKeysText[0];
             }
-            returnString += "<img class=\"symbolImage\" src=\"" + getSymbolApiUrl(insideKeysText[1]) + "\"/>";
+            returnString += "!" + getSymbolApiUrl(insideKeysText[1]) + "!";
         }
 
         returnString += splitedDescription[splitedDescription.length - 1];
@@ -101,9 +111,8 @@ public class CardUIPreparerService {
     private String prepareManaCost(String baseManaCost) {
         var finalManaCost = "";
         var splitedColors = baseManaCost.split("\\{");
-        for (int i = 1; i < splitedColors.length; i ++) {
-            finalManaCost += "<img class=\"symbolImage\" src=\"" +
-                    getSymbolApiUrl(splitedColors[i].replace("}", "")) + "\"/>";
+        for(int i = 1; i < splitedColors.length; i++) {
+            finalManaCost += getSymbolApiUrl(splitedColors[i].replace("}", "")) + "!";
         }
 
         return finalManaCost;
@@ -113,7 +122,7 @@ public class CardUIPreparerService {
         var finalString = "";
         var colorsList = new ArrayList<String>();
         for (int i = 0; i < colors.size(); i++) {
-            finalString += "<img class=\"symbolImage\" src=\"" + getSymbolApiUrl(colors.get(i)) + "\"/>";
+            finalString += getSymbolApiUrl(colors.get(i)) + "!";
         }
         colorsList.add(finalString);
         return colorsList;
@@ -128,6 +137,6 @@ public class CardUIPreparerService {
     }
 
     private String prepareSetUriImage(String setImageUri) {
-        return "<img class=\"setImage\" src=\"" + setImageUri + "\"/>";
+        return setImageUri + "!";
     }
 }

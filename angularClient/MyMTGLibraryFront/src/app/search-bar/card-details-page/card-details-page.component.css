@@ -1,0 +1,136 @@
+.cardNameText {
+    text-align: center;
+    font-size: 6vh;
+    color: white;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.mainContentDiv {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    overflow: auto;
+}
+
+/* Image div*/
+.imageDiv {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5vw;
+}
+
+#cardImage {
+    height: 50vh;
+    width: 26vw;
+    margin-bottom: 2vh;
+}
+
+/* Card not saved */
+.cardCopiesText {
+    text-align: center;
+    font-size: 5vh;
+    color: white;
+    margin-bottom: 2vh;
+}
+
+.updateCardButton {
+    height: 5vh;
+    width: auto;
+    align-self: center;
+    color: white;
+    font-size: 3vh;
+    background-color: #3a3a3a;
+    border: #4d4d4d solid;
+    border-radius: 10px;
+    padding: 0 0.5vw;
+    cursor: pointer;
+}
+
+/* Card saved */
+
+.cardSavedDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.outerCopiesDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+.cardCopiesDiv {
+    height: 6vh;
+    display: flex;
+    flex-direction: row;
+    background-color: #ccc7bd;
+    border: #4d4d4d solid;
+    border-radius: 10px;
+    margin-left: 1vw;
+    padding: 0 1vw 1vh;
+}
+
+.sumSubCopiesSymbol {
+    font-size: 5vh;
+    font-weight: bold;
+}
+
+.copiesNumber {
+    font-size: 5vh;
+    margin: 0 1vw;
+}
+
+.updateDeleteButton {
+    font-size: 5vh;
+    background-color: #ccc7bd;
+    border: #4d4d4d solid;
+    border-radius: 10px;
+    padding: 0 0.5vw;
+}
+
+.upadteButton {
+    margin-right: 2vw;
+}
+
+/* Details div */
+
+.detailsDiv {
+    display: block;
+    width: 55vw;
+    max-height: 70vh;
+    overflow-y: scroll;
+    top: 0;
+    background-color: #494949;
+    border: #4d4d4d solid;
+    border-radius: 10px;
+    margin-left: 7vw;
+    padding: 0 1vw;
+}
+
+.detailDiv {
+    overflow: visible;
+    margin-bottom: 1vh;
+}
+
+.symbolImage{
+    height: 3vh;
+    width: auto;
+}
+
+.detailInfoText {
+    color: white;
+    font-size: 3vh;
+
+}
+
+.detailInfoText::before {
+    content: "• ";
+    color: white;
+}
+
+.detailText {
+    color: white;
+    font-size: 3vh;
+    margin-left: 1vw;
+    text-align: start;
+}

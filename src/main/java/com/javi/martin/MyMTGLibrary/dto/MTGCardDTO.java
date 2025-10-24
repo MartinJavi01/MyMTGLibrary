@@ -7,7 +7,6 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.smartcardio.Card;
 import java.util.Date;
 import java.util.List;
 
@@ -22,8 +21,6 @@ public class MTGCardDTO {
     private String id;
     @JsonProperty("oracle_id")
     private String oracleId;
-    @JsonProperty("cardmarket_id")
-    private String cardmarketId;
     @JsonProperty("name")
     private String name;
     @JsonProperty("released_at")
@@ -66,9 +63,11 @@ public class MTGCardDTO {
     private MTGSetDTO setDTO;
     private int copies;
     private boolean foil;
+    private String primaryType;
+    private String subType;
 
     public MTGCardDTO() {
-        copies = 1;
+        copies = 0;
         foil = false;
     }
 }
