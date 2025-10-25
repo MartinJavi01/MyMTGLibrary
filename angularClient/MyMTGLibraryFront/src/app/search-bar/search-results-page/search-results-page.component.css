@@ -1,0 +1,39 @@
+.searchTitle {
+    text-align: center;
+    font-size: 6vh;
+    color: white;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.noResultsText {
+    text-align: center;
+    font-size: 3vh;
+    color: white;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.resultsDiv {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.cardDiv {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2vh;
+}
+
+.cardImage {
+    align-self: center;
+    width: 20vw;
+    height: auto;
+}
+
+.cardNameText {
+    text-align: center;
+    font-size: 2vh;
+    color: white;
+    margin-top: 0;
+}

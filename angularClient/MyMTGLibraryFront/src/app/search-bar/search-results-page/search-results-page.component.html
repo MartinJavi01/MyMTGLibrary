@@ -1,0 +1,16 @@
+<body>
+    <p class="searchTitle">Search results</p>
+
+    <div class="resultsDiv">
+        @if (currentResults == null) {
+            <p class="noResultsText">No cards were found with the current search</p>
+        } @else {
+            @for (card of currentResults.data; track $index) {
+                <div class="cardDiv">
+                    <img class="cardImage" src="{{card.image_uris.border_crop}}">
+                    <p class="cardNameText">{{card.name}}</p>
+                </div>
+            }
+        }
+    </div>
+</body>
