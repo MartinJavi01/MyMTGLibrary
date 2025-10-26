@@ -2,7 +2,7 @@
     <p class="cardNameText">{{currentCard.name}}</p>
     <div class="mainContentDiv">
         <div class="imageDiv">
-            <img id="cardImage" src="mtg-back.jpg">
+            <img id="cardImage" src="{{currentCard.image_uris.border_crop}}">
 
             @if(currentCard.copies <= 0) {
                 <span class="cardCopiesText">Card not saved</span>

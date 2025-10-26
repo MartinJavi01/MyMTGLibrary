@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import { Router, RouterOutlet, RouterLink, ActivatedRoute } from '@angular/router';
-import {SearchBarService} from './search-bar.service';
 import {MTGCard} from '../models/MTGCard';
 import {FormsModule} from '@angular/forms';
 
@@ -14,7 +13,7 @@ export class SearchBarComponent {
 
   searchString = "";
 
-  constructor(private router: Router, private route: ActivatedRoute, private service: SearchBarService) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   manageKeyboardEvent(event: KeyboardEvent) {
     if (event.key == 'Enter') {
@@ -23,27 +22,13 @@ export class SearchBarComponent {
   }
 
   performCardSearch() {
-    if(this.searchString.replaceAll(" ", "").length == 0) {
+    var formattedString = this.searchString.replaceAll(" ", "")
+    if(formattedString.length == 0) {
       alert("Can't perform empty search!");
       return;
     }
 
-    this.service.searchByName(this.searchString.replaceAll(' ', '+'))
-        .subscribe( card => {
-            this.searchString = "";
-            this.router.navigate(['mtglib/details'], {queryParams: {name: card.name}});
-          },
-          err => {
-            this.service.searchById(this.searchString)
-              .subscribe( card => {
-                  this.searchString = "";
-                  this.router.navigate(['mtglib/details']);
-                },
-                err => {
-                  console.error(err);
-                })
-            console.log(err);
-          })
+    this.router.navigate(['mtglib/search'], {queryParams: {searchString: formattedString}});
   }
 
   redirect(redirectPath: String) {

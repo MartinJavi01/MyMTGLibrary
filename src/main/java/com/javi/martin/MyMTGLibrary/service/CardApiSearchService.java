@@ -1,99 +1,86 @@
 package com.javi.martin.MyMTGLibrary.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.javi.martin.MyMTGLibrary.dto.ApiSearchResponseDTO;
 import com.javi.martin.MyMTGLibrary.dto.MTGCardDTO;
 import com.javi.martin.MyMTGLibrary.dto.MTGSetDTO;
 import com.javi.martin.MyMTGLibrary.utils.ParametersStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import static com.javi.martin.MyMTGLibrary.constants.MyMTGLibraryConstants.*;
 
 @Service
-public class CardSearchService {
-
-    @Autowired
-    private CardDBSaverService cardDBSaverService;
+public class CardApiSearchService {
 
     private ObjectMapper objectMapper;
-    private static final Logger log = LoggerFactory.getLogger(CardSearchService.class);
+    private static final Logger log = LoggerFactory.getLogger(CardApiSearchService.class);
 
-    public CardSearchService() {
+    public CardApiSearchService() {
         objectMapper = new ObjectMapper();
     }
 
-    public List<MTGCardDTO> getMultipleCardsBySearch(String searchString) {
+    public ApiSearchResponseDTO searchCardByName(String searchString) {
         var requestParams = new HashMap<String, String>();
         requestParams.put("q", searchString);
 
         var client = HttpClient.newHttpClient();
-        List<MTGCardDTO> returnList;
+
+        ApiSearchResponseDTO responseObject;
 
         try {
+            log.info("Performing api call to {}", SCRYFALL_BASE_PATH + SEARCH_PATH + ParametersStringBuilder.getParamsString(requestParams));
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(SCRYFALL_BASE_PATH + SEARCH_PATH + ParametersStringBuilder.getParamsString(requestParams))).build();
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            returnList = objectMapper.readValue(response.body(), new TypeReference<List<MTGCardDTO>>() {});
+            log.debug("Received response: {}", response);
+            responseObject = objectMapper.readValue(response.body(), new TypeReference<ApiSearchResponseDTO>() {});
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        returnList.forEach(card -> card.setSetDTO(getSetForCard(card)));
 
-        return returnList;
+        if(responseObject.getData().size() > 20) {
+            responseObject.setData(getReducedDataList(responseObject));
+        }
+
+        return responseObject;
     }
 
-    public MTGCardDTO searchCardByName(String cardName) {
-        var requestParams = new HashMap<String, String>();
-        requestParams.put("fuzzy", cardName);
-        requestParams.put("format", "json");
-
-        var client = HttpClient.newHttpClient();
-        MTGCardDTO returnCard;
-
-        try  {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(SCRYFALL_BASE_PATH + NAMED_PATH + ParametersStringBuilder.getParamsString(requestParams))).build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            returnCard = objectMapper.readValue(response.body(), MTGCardDTO.class);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    private List<MTGCardDTO> getReducedDataList(ApiSearchResponseDTO responseObject) {
+        var newList = new ArrayList<MTGCardDTO>();
+        for (int i = 0; i < 20; i++) {
+            newList.add(responseObject.getData().get(i));
         }
-
-        returnCard.setSetDTO(getSetForCard(returnCard));
-
-        return returnCard;
+        return newList.stream().toList();
     }
 
     public MTGCardDTO searchCardById(String id) {
         var client = HttpClient.newHttpClient();
-        MTGCardDTO returnCard;
+        var card = new MTGCardDTO();
 
         try {
+            log.info("Performing api call to {}", SCRYFALL_BASE_PATH + ID_PATH + id);
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(SCRYFALL_BASE_PATH + ID_PATH + id)).build();
-
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            returnCard = objectMapper.readValue(response.body(), MTGCardDTO.class);
+            log.debug("Received response: {}", response);
+            card = objectMapper.readValue(response.body(), new TypeReference<>() {});
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-        returnCard.setSetDTO(getSetForCard(returnCard));
-
-        return returnCard;
+        card.setSetDTO(getSetForCard(card));
+        return card;
     }
 
     public MTGSetDTO getSetForCard(MTGCardDTO card) {
@@ -111,9 +98,5 @@ public class CardSearchService {
         }
 
         return returnSet;
-    }
-
-    public String returnCardAsJson(MTGCardDTO cardDTO) throws JsonProcessingException {
-        return objectMapper.writeValueAsString(cardDTO);
     }
 }

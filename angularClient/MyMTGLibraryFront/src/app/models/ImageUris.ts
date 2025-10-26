@@ -1,3 +1,3 @@
 export interface ImageUris {
-    normal: string
+    border_crop: string
 }

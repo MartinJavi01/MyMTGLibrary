@@ -8,7 +8,6 @@ public class MyMTGLibraryConstants {
     //API
     public static final String SCRYFALL_BASE_PATH = "https://api.scryfall.com/";
     public static final String SEARCH_PATH = "cards/search";
-    public static final String NAMED_PATH = "cards/named";
     public static final String ID_PATH = "cards/";
     public static final String SETS_PATH = "sets/";
     public static final String SCRYFALL_SVGS_BASE_PATH = "https://svgs.scryfall.io/";
