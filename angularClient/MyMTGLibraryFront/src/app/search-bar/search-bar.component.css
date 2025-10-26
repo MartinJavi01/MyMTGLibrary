@@ -143,9 +143,11 @@
 }
 
 .main {
-    position: relative;
+    position: absolute;
+    top: 16vh;
+    left: 0vh;
     height: 84vh;
+    width: 100vw;
     z-index: 2;
-    margin-top: 2vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 }

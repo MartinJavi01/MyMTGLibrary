@@ -20,7 +20,7 @@ public class CardSearchController {
     }
 
     @GetMapping("/id/{id}")
-    public MTGCardDTO searchForCardById(@PathVariable String searchId) {
-        return searchApiService.searchCardById(searchId);
+    public MTGCardDTO searchForCardById(@PathVariable String id) {
+        return searchApiService.searchCardById(id);
     }
 }

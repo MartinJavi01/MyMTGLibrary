@@ -14,7 +14,7 @@ export class CardDetailsPageService {
     }
 
     searchById(id: String): Observable<MTGCard> {
-        console.log(this.baseUrl + "/details/id/" + id);
-      return this.httpClient.get(this.baseUrl + "/details/id/" + id) as Observable<MTGCard>;
+        console.log(this.baseUrl + "/search/id/" + id);
+      return this.httpClient.get(this.baseUrl + "/search/id/" + id) as Observable<MTGCard>;
     }
 }

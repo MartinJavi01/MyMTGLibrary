@@ -70,9 +70,9 @@ public class CardApiSearchService {
         var card = new MTGCardDTO();
 
         try {
-            log.info("Performing api call to {}", SCRYFALL_BASE_PATH + id);
+            log.info("Performing api call to {}", SCRYFALL_BASE_PATH + ID_PATH + id);
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(SCRYFALL_BASE_PATH + SEARCH_PATH + id)).build();
+                    .uri(URI.create(SCRYFALL_BASE_PATH + ID_PATH + id)).build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             log.debug("Received response: {}", response);
             card = objectMapper.readValue(response.body(), new TypeReference<>() {});

@@ -31,4 +31,8 @@ export class SearchResultsPageComponent implements OnInit {
         })
     }
 
+    redirectToCardDetails(cardId: String) {
+        this.router.navigate(['mtglib/details'], {queryParams: {cardId: cardId}});
+    }
+
 }

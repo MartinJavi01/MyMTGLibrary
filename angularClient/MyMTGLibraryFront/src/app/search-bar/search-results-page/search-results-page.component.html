@@ -6,7 +6,7 @@
             <p class="noResultsText">No cards were found with the current search</p>
         } @else {
             @for (card of currentResults.data; track $index) {
-                <div class="cardDiv">
+                <div class="cardDiv" (click)="redirectToCardDetails(card.id)">
                     <img class="cardImage" src="{{card.image_uris.border_crop}}">
                     <p class="cardNameText">{{card.name}}</p>
                 </div>

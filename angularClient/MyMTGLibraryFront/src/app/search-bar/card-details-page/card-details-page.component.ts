@@ -18,12 +18,13 @@ export class CardDetailsPageComponent implements OnInit{
 
   ngOnInit(): void {
     this.route.queryParams.subscribe( params => {
-      if (params['id'] === undefined || params['id'].length === 0) {
+      if (params['cardId'] === undefined || params['cardId'].length === 0) {
           alert("Something went wrong in the card search, try again please");
           this.router.navigate(['mtglib/home']);
         }
 
-        this.service.searchById(params['id'].replaceAll(" ", "+")).subscribe( card => {
+        this.service.searchById(params['cardId'].replaceAll(" ", "+")).subscribe( card => {
+          console.log(card)
           this.currentCard = card;
           this.prepareCardData(this.currentCard)
           sessionStorage.setItem("cardName", this.currentCard.name)
