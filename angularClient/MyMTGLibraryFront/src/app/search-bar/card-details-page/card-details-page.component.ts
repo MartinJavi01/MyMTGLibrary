@@ -13,6 +13,7 @@ export class CardDetailsPageComponent implements OnInit{
   currentCard = {} as MTGCard
   manaCosts = {} as string[]
   colorIdentity = {} as string[]
+  cardDescription = {} as string[]
 
   constructor(private router: Router, private route: ActivatedRoute, private service: CardDetailsPageService) {}
 
@@ -35,11 +36,47 @@ export class CardDetailsPageComponent implements OnInit{
 
   prepareCardData(currentCard: MTGCard) {
     document.getElementById("cardImage")?.setAttribute("src", currentCard.image_uris.border_crop)
-    this.manaCosts = currentCard.mana_cost.split("!")
-    if (currentCard.color_identity[0].includes("!")) {
+
+    this.manaCosts = this.getRemovedBrackets(currentCard.mana_cost)
+    this.manaCosts.length -= 1
+
+    if (currentCard.color_identity.length > 0 && currentCard.color_identity[0].includes("!")) {
       this.colorIdentity = currentCard.color_identity[0].split("!")
     } else {
       this.colorIdentity = currentCard.color_identity
     }
+    this.currentCard.color_identity.forEach((color, index) => {
+      this.currentCard.color_identity[index] = "https://svgs.scryfall.io/card-symbols/" + color + ".svg"
+    })
+
+    this.cardDescription = this.getSplittedDescription(currentCard.oracle_text)
+  }
+
+  getRemovedBrackets(s: string): string[] {
+    if(!s.includes("{") && !s.includes("}")) {
+      var returnString = {} as string[]
+      return returnString
+    } else {
+      var splittedString = s.split("}")
+      splittedString.forEach((color, index) => {
+        var finalColor = color[1]
+        splittedString[index] = "https://svgs.scryfall.io/card-symbols/" + finalColor + ".svg"
+      })
+
+      return splittedString
+    }
+  }
+
+  getSplittedDescription(description: string): string[] {
+    var splittedDescription = description.split(".")
+    splittedDescription.forEach((text, index) => {
+      if(text[0] == ')' && index != 0) {
+        splittedDescription[index] = text.substring(1, text.length)
+        splittedDescription[index - 1] += ")"
+      }
+      splittedDescription[index] = splittedDescription[index] + "."
+    })
+    splittedDescription.length -= 1
+    return splittedDescription
   }
 }

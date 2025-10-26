@@ -27,8 +27,8 @@
 
         <div class="detailsDiv">
             <div class="detailDiv">
-                <span class="detailInfoText">Card type:</span>
-                <span class="detailText">{{currentCard.primaryType}}</span>
+                <span class="detailInfoText">Spell type:</span>
+                <span class="detailText">{{currentCard.spellType}}</span>
             </div>
             
             @if (currentCard.subType != null) {
@@ -48,10 +48,10 @@
                 <span class="detailInfoText">Color identity:</span>
                 @if (colorIdentity.length > 1) {
                     @for (symbol of colorIdentity; track $index) {
-                        <img class="symbolImage" src={{symbol}}>
+                        <img class="symbolImage" src={{currentCard.color_identity[$index]}}>
                     }
                 } @else {
-                    <span class="detailText">{{currentCard.color_identity}}</span>
+                    <span class="detailText">Colorless</span>
                 }
             </div>
             <div class="detailDiv">
@@ -65,6 +65,7 @@
             <div class="detailDiv">
                 <span class="detailInfoText">Set:</span>
                 <span class="detailText">{{currentCard.setDTO.name}}</span>
+                <img class="setImage" src="{{currentCard.setDTO.icon_svg_uri}}">
             </div>
             
             @if (currentCard.power != null) {
@@ -81,23 +82,14 @@
                 </div>
             }
 
-            <div class="detailDiv">
+            <div class="desciptionDiv">
                 <span class="detailInfoText">Description:</span>
                 <br>
-                @if (currentCard.oracle_text.includes("!")) {
-                    @for (textLine of currentCard.oracle_text.split("!"); track $index) {
-                        @if (textLine.includes("https")) {
-                            <img class="symbolImage" src={{textLine}}>
-                        } @else if (textLine.includes("br>")) {
-                            <br><br>
-                        } @else {
-                            @if (textLine.length > 0) {
-                                <span class="detailText">{{textLine}}</span>
-                            }
-                        }
-                    }
-                } @else {
-                   <span class="detailText">{{currentCard.oracle_text}}</span> 
+                <br>
+                @for (text of cardDescription; track $index) {
+                    <span class="detailText">{{text}}</span>
+                    <br>
+                    <br>
                 }
             </div>
             <div class="detailDiv">

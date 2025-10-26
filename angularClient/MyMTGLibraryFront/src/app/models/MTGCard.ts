@@ -13,7 +13,7 @@ export interface MTGCard {
     mana_cost: string,
     cmc: string,
     type_line: string,
-    primaryType: string,
+    spellType: string,
     subType: string,
     oracle_text: string,
     power: string,

@@ -63,7 +63,7 @@ public class MTGCardDTO {
     private MTGSetDTO setDTO;
     private int copies;
     private boolean foil;
-    private String primaryType;
+    private String spellType;
     private String subType;
 
     public MTGCardDTO() {

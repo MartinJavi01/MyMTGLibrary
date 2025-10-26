@@ -97,7 +97,7 @@
 .detailsDiv {
     display: block;
     width: 55vw;
-    max-height: 70vh;
+    height: 70vh;
     overflow-y: scroll;
     top: 0;
     background-color: #494949;
@@ -112,14 +112,26 @@
     margin-bottom: 1vh;
 }
 
+.descriptionDiv {
+    display: flex;
+    flex-direction: column;
+}
+
 .symbolImage{
-    height: 3vh;
+    height: 4vh;
     width: auto;
+    margin-left: 1vh;
+}
+
+.setImage {
+    height: auto;
+    width: 5vh;
+    margin-left: 1vh;
 }
 
 .detailInfoText {
     color: white;
-    font-size: 3vh;
+    font-size: 4vh;
 
 }
 
@@ -130,7 +142,7 @@
 
 .detailText {
     color: white;
-    font-size: 3vh;
+    font-size: 4vh;
     margin-left: 1vw;
     text-align: start;
 }

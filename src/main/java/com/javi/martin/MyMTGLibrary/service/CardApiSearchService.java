@@ -79,7 +79,11 @@ public class CardApiSearchService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
         card.setSetDTO(getSetForCard(card));
+        card.setSpellType(getSpellType(card));
+        card.setSubType(getSpellSubType(card));
+
         return card;
     }
 
@@ -98,5 +102,21 @@ public class CardApiSearchService {
         }
 
         return returnSet;
+    }
+
+    public String getSpellType(MTGCardDTO card) {
+        if (card.getTypeLine().contains(TYPE_LINE_SEPARATOR)) {
+            return card.getTypeLine().split(TYPE_LINE_SEPARATOR)[0];
+        } else {
+            return card.getTypeLine();
+        }
+    }
+
+    public String getSpellSubType(MTGCardDTO card) {
+        if (card.getTypeLine().contains(TYPE_LINE_SEPARATOR)) {
+            return card.getTypeLine().split(TYPE_LINE_SEPARATOR)[1];
+        } else {
+            return null;
+        }
     }
 }
