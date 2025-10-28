@@ -129,6 +129,30 @@
     margin-left: 1vh;
 }
 
+.mythic {
+    filter: contrast(1000%) 
+            invert(100%) 
+            sepia(100%) 
+            saturate(10000%) 
+            hue-rotate(300deg);
+}
+
+.rare {
+    filter: contrast(1000%) 
+            invert(100%) 
+            sepia(100%) 
+            saturate(10000%) 
+            hue-rotate(330deg);
+}
+
+.uncommon {
+    filter: contrast(1000%) 
+            invert(100%) 
+            sepia(100%) 
+            saturate(10000%) 
+            hue-rotate(180deg);
+}
+
 .detailInfoText {
     color: white;
     font-size: 4vh;

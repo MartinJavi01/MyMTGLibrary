@@ -15,6 +15,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -84,10 +85,12 @@ public class CardApiSearchService {
         card.setSpellType(getSpellType(card));
         card.setSubType(getSpellSubType(card));
 
+        card.setOracleText(getUIDescription(card.getOracleText()));
+
         return card;
     }
 
-    public MTGSetDTO getSetForCard(MTGCardDTO card) {
+    private MTGSetDTO getSetForCard(MTGCardDTO card) {
         var client = HttpClient.newHttpClient();
         MTGSetDTO returnSet;
 
@@ -104,7 +107,7 @@ public class CardApiSearchService {
         return returnSet;
     }
 
-    public String getSpellType(MTGCardDTO card) {
+    private String getSpellType(MTGCardDTO card) {
         if (card.getTypeLine().contains(TYPE_LINE_SEPARATOR)) {
             return card.getTypeLine().split(TYPE_LINE_SEPARATOR)[0];
         } else {
@@ -112,11 +115,33 @@ public class CardApiSearchService {
         }
     }
 
-    public String getSpellSubType(MTGCardDTO card) {
+    private String getSpellSubType(MTGCardDTO card) {
         if (card.getTypeLine().contains(TYPE_LINE_SEPARATOR)) {
             return card.getTypeLine().split(TYPE_LINE_SEPARATOR)[1];
         } else {
             return null;
         }
+    }
+
+    private String getUIDescription(String baseDescription) {
+        String finalDescription = "";
+        var splittedDescription = baseDescription.split("\\n");
+        for(int i = 0; i < splittedDescription.length; i++) {
+            if (splittedDescription[i].contains("{")) {
+                splittedDescription[i] = getUISymbolString(splittedDescription[i]);
+            }
+            finalDescription += splittedDescription[i] + "!";
+        }
+        return finalDescription.substring(0, finalDescription.length()-1);
+    }
+
+    private String getUISymbolString(String descriptionLine) {
+        var splittedLine = descriptionLine.split("\\{");
+        for(int i = 1; i < splittedLine.length; i++) {
+            var symbolSplitted = splittedLine[i].replace("}", "!").split("!");
+            symbolSplitted[0] = SCRYFALL_SVG_PATH + symbolSplitted[0] + SVG_EXTENSION;
+            splittedLine[i] = Arrays.toString(symbolSplitted);
+        }
+        return Arrays.toString(splittedLine);
     }
 }

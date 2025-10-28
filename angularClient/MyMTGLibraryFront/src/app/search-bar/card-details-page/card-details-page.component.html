@@ -65,7 +65,7 @@
             <div class="detailDiv">
                 <span class="detailInfoText">Set:</span>
                 <span class="detailText">{{currentCard.setDTO.name}}</span>
-                <img class="setImage" src="{{currentCard.setDTO.icon_svg_uri}}">
+                <img class="setImage {{currentCard.rarity}}" src="{{currentCard.setDTO.icon_svg_uri}}">
             </div>
             
             @if (currentCard.power != null) {
@@ -87,9 +87,9 @@
                 <br>
                 <br>
                 @for (text of cardDescription; track $index) {
-                    <span class="detailText">{{text}}</span>
-                    <br>
-                    <br>
+                    @if(text.includes("@")) {
+                        <img class="symbolImage" src="{{text.substring(0,text.length-1)}}">
+                    }
                 }
             </div>
             <div class="detailDiv">
