@@ -114,13 +114,13 @@
 
 .descriptionDiv {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .symbolImage{
     height: 4vh;
     width: auto;
-    margin-left: 1vh;
+    margin-left: 0.5vh;
 }
 
 .setImage {
@@ -160,7 +160,7 @@
 }
 
 .detailInfoText::before {
-    content: "• ";
+    content: "— ";
     color: white;
 }
 
@@ -168,5 +168,15 @@
     color: white;
     font-size: 4vh;
     margin-left: 1vw;
-    text-align: start;
+    text-align: justify;
+}
+
+.descriptionTextDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.descriptionTextSymbolDiv {
+    display: flex;
+    flex-direction: row;
 }

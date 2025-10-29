@@ -50,7 +50,7 @@ export class CardDetailsPageComponent implements OnInit{
     })
 
     //this.cardDescription = this.getSplittedDescription(currentCard.oracle_text)
-    this.cardDescription = this.getTestDescription(currentCard.oracle_text)
+    this.cardDescription = currentCard.oracle_text.split("!")
   }
 
   getRemovedBrackets(s: string): string[] {
@@ -66,41 +66,5 @@ export class CardDetailsPageComponent implements OnInit{
 
       return splittedString
     }
-  }
-
-  getSplittedDescription(description: string): string[] {
-    var splittedDescription = description.split(".")
-    splittedDescription.forEach((text, index) => {
-      if(text[0] == ')' && index != 0) {
-        splittedDescription[index] = text.substring(1, text.length)
-        splittedDescription[index - 1] += ")"
-      }
-      splittedDescription[index] = splittedDescription[index] + "."
-    })
-
-    splittedDescription.forEach((text, index) => {
-      if (text.search("\\d+(?:\\.\\d+)?:") < 0) {
-        if (!text.includes("•")) {
-          splittedDescription[index] = "- " + text
-        }
-      }
-
-      if(text.includes("choose") && text.includes("—")) {
-
-      }
-    })
-
-    splittedDescription.length -= 1
-    return splittedDescription
-  }
-
-  getTestDescription(description: string): string[] {
-    var splittedDescription = description.split(".")
-    var text1 = "prueba"
-    var text2 = "https://svgs.scryfall.io/card-symbols/C.svg@"
-
-    splittedDescription[0] = text1
-    splittedDescription[1] = text2
-    return splittedDescription
   }
 }

@@ -136,12 +136,17 @@ public class CardApiSearchService {
     }
 
     private String getUISymbolString(String descriptionLine) {
+        var finalLine = "";
         var splittedLine = descriptionLine.split("\\{");
-        for(int i = 1; i < splittedLine.length; i++) {
-            var symbolSplitted = splittedLine[i].replace("}", "!").split("!");
-            symbolSplitted[0] = SCRYFALL_SVG_PATH + symbolSplitted[0] + SVG_EXTENSION;
-            splittedLine[i] = Arrays.toString(symbolSplitted);
+        for(int i = 0; i < splittedLine.length; i++) {
+            var line = splittedLine[i];
+            if (line.contains("}")) {
+                var splitted2 = line.split("}");
+                var colorString = "#" + SCRYFALL_SVG_PATH + splitted2[0] + SVG_EXTENSION + "#";
+                line = (splitted2.length > 1) ? colorString + splitted2[1] : colorString;
+            }
+            finalLine += line;
         }
-        return Arrays.toString(splittedLine);
+        return finalLine;
     }
 }

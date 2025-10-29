@@ -86,16 +86,34 @@
                 <span class="detailInfoText">Description:</span>
                 <br>
                 <br>
-                @for (text of cardDescription; track $index) {
-                    @if(text.includes("@")) {
-                        <img class="symbolImage" src="{{text.substring(0,text.length-1)}}">
+                <div class="descriptionTextDiv">
+                    @for (text of cardDescription; track $index) {
+                        @if (text.includes("#")) {
+                            <div>
+                                @for (text2 of text.split("#"); track $index) {
+                                    @if (text2.includes("http")) {
+                                        <img class="symbolImage" src="{{text2}}">
+                                    } @else {
+                                        <span class="detailText">{{text2}}</span>
+                                    }
+                                }
+                            </div>
+                            <br>
+                        } @else {
+                            <span class="detailText">{{text}}</span>
+                            <br>
+                        }
                     }
-                }
+                </div>
             </div>
+            <br>
+            <br>
+
             <div class="detailDiv">
                 <span class="detailInfoText">Eur price:</span>
                 <span class="detailText">{{currentCard.prices.eur}}</span>
             </div>
+
             <div class="detailDiv">
                 <span class="detailInfoText">Usd price:</span>
                 <span class="detailText">{{currentCard.prices.usd}}</span>
